@@ -1,4 +1,4 @@
-dep 'ivercore_1', :template => 'managed' do
+dep 'server_base', :template => 'managed' do
   installs %w[
     openjdk-7-jre
   ]
