@@ -1,4 +1,4 @@
-dep 'server_base', :template => 'managed' do
+dep 'server base', :template => 'managed' do
   installs %w[
     openjdk-7-jre
   ]
