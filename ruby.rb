@@ -2,8 +2,8 @@ dep 'ruby' do
   requires 'git', 'rbfu', 'ruby-build'
 
   met? do
-    File.exists?('/usr/local/rubies/versions/1.9.3') &&
-      File.exists?('/usr/local/rubies/versions/1.8.7')
+    File.exists?('/usr/local/rbfu/rubies/1.8.7') &&
+      File.exists?('/usr/local/rbfu/rubies/1.9.3')
   end
 
   meet do
