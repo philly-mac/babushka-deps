@@ -1,4 +1,4 @@
-dep 'super-mac laptop', :template => 'managed' do
+dep 'super-mac arch laptop', :template => 'managed' do
   installs %w[
     zsh
     ack
