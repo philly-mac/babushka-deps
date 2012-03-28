@@ -16,4 +16,5 @@ end
 dep 'mongodb', :template => 'managed' do
   requires 'mongodb sources'
   installs 'mongodb-10gen'
+  provides 'mongod'
 end
