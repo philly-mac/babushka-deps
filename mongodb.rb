@@ -9,6 +9,7 @@ dep 'mongodb sources' do
   meet do
     log_shell "Adding key for mongodb", "apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10"
     sources_list.append(mongodb_source)
+    log_shell "Updating apt", "apt-get update"
   end
 end
 
