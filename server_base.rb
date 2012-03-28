@@ -6,11 +6,15 @@ dep 'git', :template => 'managed' do
   installs "git-all"
 end
 
+dep 'build tools', :template => 'managed' do
+  installs "build-essential"
+end
 
 
 dep 'server base' do
   requires 'java',
     'git',
+    'build tools'
     'ruby',
     'mongodb'
 end
