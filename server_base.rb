@@ -14,7 +14,7 @@ end
 dep 'server base' do
   requires 'java',
     'git',
-    'build tools'
+    'build tools',
     'ruby',
     'mongodb'
 end
