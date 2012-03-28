@@ -8,6 +8,7 @@ end
 
 dep 'build tools', :template => 'managed' do
   installs "build-essential"
+  provides 'gcc'
 end
 
 
