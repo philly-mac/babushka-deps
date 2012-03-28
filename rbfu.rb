@@ -3,7 +3,9 @@ dep 'ruby-build' do
   meet do
     cd '/tmp' do
       log_shell "Fetching ruby-build", "https://github.com/sstephenson/ruby-build.git" if !File.exists?("rbfu") || !File.directory?("ruby-build")
-      cd 'ruby-build' { shell './install.sh' }
+      cd 'ruby-build' do
+        shell './install.sh'
+      end
     end
   end
 end
