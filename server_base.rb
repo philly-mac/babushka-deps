@@ -20,5 +20,6 @@ dep 'server base' do
     'build tools',
     'ruby',
     'mongodb',
-    'rsync'
+    'rsync',
+    'elasticsearch'
 end
