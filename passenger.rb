@@ -4,6 +4,6 @@ dep 'ruby 1.9.3' do
   end
 end
 
-dep 'passenger gem', :template => 'gem'
+dep 'passenger gem', :template => 'gem' do
   requires 'ruby 1.9.3'
 end
