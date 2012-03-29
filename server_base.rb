@@ -17,5 +17,6 @@ dep 'server base' do
     'git',
     'build tools',
     'ruby',
-    'mongodb'
+    'mongodb',
+    'rsync.managed'
 end

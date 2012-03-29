@@ -1,4 +1,5 @@
 dep 'IverCore-1' do
-  requires 'server base'
+  requires 'server base',
+    'radicale.managed'
 
 end
