@@ -12,6 +12,7 @@ dep 'build tools', :template => 'managed' do
 end
 
 dep 'rsync', :template => 'managed'
+dep 'htop', :template => 'managed'
 
 
 dep 'server base' do
@@ -21,5 +22,6 @@ dep 'server base' do
     'ruby',
     'mongodb',
     'rsync',
-    'elasticsearch'
+    'elasticsearch',
+    'htop'
 end
