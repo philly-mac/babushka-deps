@@ -1,6 +1,4 @@
-dep 'radicale', :tempalte => 'managed'
-
-end
+dep 'radicale.managed'
 
 dep 'IverCore-1' do
   requires 'server base',
