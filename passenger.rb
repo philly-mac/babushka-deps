@@ -1,9 +1,11 @@
 dep 'ruby 1.9.3' do
   met? do
-    shell("rbfu-env")
+    Shell.new("rbfu-env").run.ok?
   end
 
-  meet { shell 'eval "$(rbfu --init)"' }
+  meet do
+    Shell.new('eval "$(rbfu --init)"').run
+  end
 end
 
 dep 'passenger gem', :template => 'gem' do
