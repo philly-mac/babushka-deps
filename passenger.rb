@@ -1,10 +1,10 @@
 dep 'ruby 1.9.3' do
   met? do
-    Shell.new("rbfu-env").run.ok?
+    run("rbfu-env")
   end
 
   meet do
-    Shell.new('eval "$(rbfu --init)"').run
+    run('eval "$(rbfu --init)"')
   end
 end
 
