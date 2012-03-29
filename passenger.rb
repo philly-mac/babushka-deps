@@ -1,6 +1,6 @@
 dep 'ruby 1.9.3' do
   met? do
-    ok?("rbfu-env")
+    shell("rbfu-env")
   end
 
   meet { shell 'eval "$(rbfu --init)' }
