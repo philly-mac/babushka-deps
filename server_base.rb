@@ -11,7 +11,7 @@ dep 'build tools', :template => 'managed' do
   provides 'gcc'
 end
 
-dep 'rsyn.managed'
+dep 'rsync.managed'
 
 
 dep 'server base' do
