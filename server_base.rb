@@ -11,6 +11,8 @@ dep 'build tools', :template => 'managed' do
   provides 'gcc'
 end
 
+dep 'rsyn.managed'
+
 
 dep 'server base' do
   requires 'java',
@@ -18,5 +20,5 @@ dep 'server base' do
     'build tools',
     'ruby',
     'mongodb',
-    'rsync.managed'
+    'rsync'
 end
