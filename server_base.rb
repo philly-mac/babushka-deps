@@ -23,5 +23,6 @@ dep 'server base' do
     'mongodb',
     'rsync',
     'elasticsearch',
-    'htop'
+    'htop',
+    'passenger gem'
 end
