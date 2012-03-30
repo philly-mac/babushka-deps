@@ -1,12 +1,17 @@
 dep 'ruby 1.9.3' do
-  met? do
-    run("rbfu-env")
+  requires 'rbfu inited'
+
+  met?
+    shell "env | grep -i GEM_HOME | grep 'rubies\/1.9.3'"
   end
 
   meet do
-    run('eval "$(rbfu --init)"')
+    shell "rbfu-env @1.9.3"
   end
+
 end
+
+
 
 dep 'passenger gem', :template => 'gem' do
   requires 'ruby 1.9.3'

@@ -21,3 +21,13 @@ dep 'rbfu' do
     end
   end
 end
+
+dep 'rbfu inited' do
+  met? do
+    shell("rbfu-env")
+  end
+
+  meet do
+    shell('eval "$(rbfu --init)"')
+  end
+end
