@@ -6,6 +6,7 @@ dep 'ruby 1.9.3' do
   end
 
   meet do
+    shell "source $HOME/.profile"
     shell "rbfu-env @1.9.3"
   end
 
