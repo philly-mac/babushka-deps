@@ -2,7 +2,7 @@ dep 'java', :template => 'managed' do
 
   installs {
     via :apt,    "openjdk-7-jre"
-    via :packman "jre7-openjdk-headless"
+    via :packman, "jre7-openjdk-headless"
   }
 end
 
