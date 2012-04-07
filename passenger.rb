@@ -12,8 +12,6 @@ dep 'ruby 1.9.3' do
 
 end
 
-libghc-zlib-dev
-
 dep 'passenger gem', :template => 'gem' do
   requires 'ruby 1.9.3'
 end
