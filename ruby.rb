@@ -12,14 +12,12 @@ dep "ruby 1.8.7" do
   meet do
     ensure_rbfu_directories
 
-    shell(:as => 'philip') do |s|
-      cd "/usr/local/rbfu/src" do
-        s.run {shell "wget http://ftp.ruby-lang.org/pub/ruby/ruby-1.8.7-p358.tar.bz2 -O ruby.tar.bz2"}
-        s.run {patch_file = "#{File.dirname(__FILE__)}/patches/ruby1.8-fix.patch"}
-        cd "ruby-1.8.7-p358" do
-          s.run {shell "patch -Np1 < ${srcdir}/fix.patch"}
-          s.run {shell "./configure --prefix=/usr/local/rbfu/rubies/1.8.7; make; make install"}
-        end
+    cd "/usr/local/rbfu/src" do
+      shell "wget http://ftp.ruby-lang.org/pub/ruby/ruby-1.8.7-p358.tar.bz2 -O ruby.tar.bz2", :as => 'philip'
+      cd "ruby-1.8.7-p358" do
+        patch_file = "#{File.dirname(__FILE__)}/patches/ruby1.8-fix.patch"
+        shell "patch -Np1 < ${srcdir}/fix.patch", :as => 'philip'
+        shell "./configure --prefix=/usr/local/rbfu/rubies/1.8.7; make; make install", :as => 'philip'
       end
     end
   end
@@ -32,10 +30,7 @@ dep "ruby 1.9.3" do
 
   meet do
     ensure_rbfu_directories
-
-    shell(:as => 'philip') do |s|
-      s.run {shell "Installing ruby 1.9.3", "ruby-build 1.9.3-p0 /usr/local/rbfu/rubies/1.9.3"}
-    end
+    shell "Installing ruby 1.9.3", "ruby-build 1.9.3-p0 /usr/local/rbfu/rubies/1.9.3", :as => 'philip'
   end
 end
 
