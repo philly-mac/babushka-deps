@@ -1,11 +1,9 @@
 ['philip', 'fabian'].each do |user|
 
-  met? do
-    '/etc/passwd'.p.grep /^#{user}/
-  end
-
   dep "user #{user}"  do
+
     met? do
+      '/etc/passwd'.p.grep(/^#{user}/)
     end
 
     meet do
