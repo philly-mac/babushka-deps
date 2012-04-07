@@ -28,7 +28,7 @@ dep "ruby 1.8.7" do
       cd "ruby-1.8.7-p358" do
         patch_file = "#{File.dirname(__FILE__)}/patches/ruby1.8-fix.patch"
         run_as 'philip',[
-          "patch -Np1 < ${srcdir}/fix.patch"
+          "patch -Np1 < ${srcdir}/fix.patch",
           "./configure --prefix=/usr/local/rbfu/rubies/1.8.7; make; make install"
         ]
       end
