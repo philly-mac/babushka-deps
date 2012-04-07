@@ -1,9 +1,16 @@
 dep 'java', :template => 'managed' do
-  installs "openjdk-7-jre"
+
+  installs {
+    via :apt,    "openjdk-7-jre"
+    via :packman "jre7-openjdk-headless"
+  }
 end
 
 dep 'git', :template => 'managed' do
-  installs "git-all"
+  installs {
+    via :apt,    "git-all"
+    via :pacman, "git"
+  }
 end
 
 dep 'build tools', :template => 'managed' do
