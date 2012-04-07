@@ -25,6 +25,7 @@ dep "ruby 1.8.7" do
 
     cd "/usr/local/rbfu/src" do
       shell "wget http://ftp.ruby-lang.org/pub/ruby/ruby-1.8.7-p358.tar.bz2 -O ruby.tar.bz2", :as => 'philip'
+      shell "tar -xjf ruby.tar.bz2", :as => 'philip'
       cd "ruby-1.8.7-p358" do
         patch_file = "#{File.dirname(__FILE__)}/patches/ruby1.8-fix.patch"
         run_as 'philip',[
