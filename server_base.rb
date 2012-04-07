@@ -25,9 +25,9 @@ dep 'htop', :template => 'managed'
 dep 'server base' do
   requires 'java',
     'git',
-    'build tools',
+    # 'build tools',
     'ruby',
-    'mongodb',
+    'mongodb.managed',
     'rsync',
     'elasticsearch',
     'htop',

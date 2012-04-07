@@ -2,7 +2,7 @@ dep 'elasticsearch' do
   elasticsearch_version = '0.19.1'
 
   met? do
-    File.exists?("/etc/init.d/elasticsearch")
+    File.exists?("/opt/elasticsearch")
   end
 
   meet do
@@ -16,12 +16,6 @@ dep 'elasticsearch' do
           shell "mv elasticsearch /opt/"
         end
       end
-
-      log_shell "Getting service script", "curl -L http://github.com/elasticsearch/elasticsearch-servicewrapper/tarball/master | tar -xz"
-      shell "mv *servicewrapper*/service /opt/elasticsearch/bin/"
-      shell "rm -Rf *servicewrapper*"
-      shell "/opt/elasticsearch/bin/service/elasticsearch install"
-      shell "ln -s `readlink -f /opt/elasticsearch/bin/service/elasticsearch` /usr/local/bin/rcelasticsearch"
     end
   end
 end
