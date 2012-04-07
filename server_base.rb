@@ -17,7 +17,7 @@ dep 'mongodb', :template => 'managed'
 
 dep 'server base' do
   requires 'sudo.managed',
-    'mongodb.managed',
+    'mongodb',
     'rsync.managed',
     'htop.managed',
     'git.managed',
