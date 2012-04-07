@@ -10,7 +10,7 @@ def run_as(user, commands, message = nil)
     if message
       log_shell message, "sudo su #{user}; #{command}"
     else
-      shell "sudo su #{user}; #{command}"
+      shell "sudo su -l #{user}; #{command}"
     end
   end
 end
