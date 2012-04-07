@@ -30,7 +30,7 @@ dep "ruby 1.9.3" do
 
   meet do
     ensure_rbfu_directories
-    shell "Installing ruby 1.9.3", "ruby-build 1.9.3-p0 /usr/local/rbfu/rubies/1.9.3", :as => 'philip'
+    log_shell "Installing ruby 1.9.3", "ruby-build 1.9.3-p0 /usr/local/rbfu/rubies/1.9.3", :as => 'philip'
   end
 end
 
