@@ -1,6 +1,5 @@
 dep 'java', :template => 'managed' do
   installs "jre7-openjdk-headless"
-  }
 end
 
 dep 'git', :template => 'managed' do
