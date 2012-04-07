@@ -4,6 +4,17 @@ def ensure_rbfu_directories
   shell "chown -Rf philip:users /usr/local/rbfu"
 end
 
+def run_as(user, commands, message = nil)
+  commands = [commands] if commands.is_a?(String)
+  commands.each do |command|
+    if message
+      log_shell message, "sudo su #{user}; #{command}"
+    else
+      shell "sudo su #{user}; #{command}"
+    end
+  end
+end
+
 dep "ruby 1.8.7" do
   met? do
     File.exists?("/usr/local/rbfu/rubies/1.8.7")
@@ -16,8 +27,10 @@ dep "ruby 1.8.7" do
       shell "wget http://ftp.ruby-lang.org/pub/ruby/ruby-1.8.7-p358.tar.bz2 -O ruby.tar.bz2", :as => 'philip'
       cd "ruby-1.8.7-p358" do
         patch_file = "#{File.dirname(__FILE__)}/patches/ruby1.8-fix.patch"
-        shell "patch -Np1 < ${srcdir}/fix.patch", :as => 'philip'
-        shell "./configure --prefix=/usr/local/rbfu/rubies/1.8.7; make; make install", :as => 'philip'
+        run_as 'philip',[
+          "patch -Np1 < ${srcdir}/fix.patch"
+          "./configure --prefix=/usr/local/rbfu/rubies/1.8.7; make; make install"
+        ]
       end
     end
   end
@@ -30,7 +43,7 @@ dep "ruby 1.9.3" do
 
   meet do
     ensure_rbfu_directories
-    log_shell "Installing ruby 1.9.3", "ruby-build 1.9.3-p0 /usr/local/rbfu/rubies/1.9.3", :as => 'philip'
+    run_as 'philip', "ruby-build 1.9.3-p0 /usr/local/rbfu/rubies/1.9.3", "Installing ruby 1.9.3"
   end
 end
 
