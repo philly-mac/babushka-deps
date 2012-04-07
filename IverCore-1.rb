@@ -1,7 +1,7 @@
-dep 'radicale', :template => 'managed'
-
 dep 'IverCore-1' do
-  requires 'server base',
-    'radicale'
+  requires 'user philip',
+    'user fabian',
+    'server base',
+    'radicale.managed'
 
 end

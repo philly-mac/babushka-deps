@@ -1,17 +1,43 @@
-[['1.8.7','1.8.7-p352'], ['1.9.3', '1.9.3-p0']].each do |ruby|
-
-  dep "ruby #{ruby.first}" do
-    met? do
-      File.exists?("/usr/local/rbfu/rubies/#{ruby.first}")
-    end
-
-    unless  File.exists?("/usr/local/rbfu/rubies/#{ruby.first}")
-      log_shell "Installing ruby #{ruby.first}", "ruby-build #{ruby.last} /usr/local/rbfu/rubies/#{ruby.first}"
-    end
-  end
-
+def ensure_directories
+  shell "mkdir -p /usr/local/rbfu/src"
+  shell "mkdir -p /usr/local/rbfu/rubies"
+  shell "chown -Rf philip:users /usr/local/rbfu"
 end
 
+dep "ruby 1.8.7" do
+  met? do
+    File.exists?("/usr/local/rbfu/rubies/1.8.7")
+  end
+
+  meet do
+    ensure_directories
+
+    sudo(:as => 'philip') do
+      cd "/usr/local/rbfu/src" do
+        shell "wget http://ftp.ruby-lang.org/pub/ruby/ruby-1.8.7-p358.tar.bz2 -O ruby.tar.bz2"
+        cd "ruby-1.8.7-p358" do
+          patch_file = "#{File.dirname(__FILE__)}/patches/ruby1.8-fix.patch"
+          shell "patch -Np1 < ${srcdir}/fix.patch"
+          shell "./configure --prefix=/usr/local/rbfu/rubies/1.8.7; make; make install"
+        end
+      end
+    end
+  end
+end
+
+dep "ruby 1.9.3" do
+  met? do
+    File.exists?("/usr/local/rbfu/rubies/1.9.3")
+  end
+
+  meet do
+    ensure_directories
+
+    sudo(:as => 'philip') do
+      log_shell "Installing ruby 1.9.3", "ruby-build 1.9.3-p0 /usr/local/rbfu/rubies/1.9.3"
+    end
+  end
+end
 
 dep 'ruby' do
   requires 'git',

@@ -14,15 +14,14 @@ end
 dep 'rsync', :template => 'managed'
 dep 'htop', :template => 'managed'
 
-
 dep 'server base' do
-  requires 'java',
-    'git',
-    # 'build tools',
-    'ruby',
+  requires 'sudo.managed',
     'mongodb.managed',
-    'rsync',
+    'rsync.managed',
+    'htop.managed',
+    'git.managed',
+    'java',
+    'ruby',
     'elasticsearch',
-    'htop',
     'passenger gem'
 end
