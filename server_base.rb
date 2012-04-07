@@ -13,6 +13,7 @@ end
 
 dep 'rsync', :template => 'managed'
 dep 'htop', :template => 'managed'
+dep 'mongodb.managed', :template => 'managed'
 
 dep 'server base' do
   requires 'sudo.managed',

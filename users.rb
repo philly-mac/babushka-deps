@@ -15,7 +15,7 @@
       shell "cat #{key} >> /home/#{user}/.ssh/authorized_keys"
       shell "chmod 700 /home/#{user}/.ssh"
       shell "chmod 600 -Rf /home/#{user}/.ssh/*"
-      shell "chown -Rf #{user} /home/#{user}/.ssh/*"
+      shell "chown -Rf #{user}:users /home/#{user}/.ssh"
     end
   end
 
