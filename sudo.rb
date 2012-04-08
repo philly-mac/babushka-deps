@@ -2,7 +2,7 @@ dep 'sudoers' do
   regex = "%wheel\\sALL=\\(ALL\\)\\sALL"
   path = '/etc/sudoers'
 
-  met? { path.p.grep(/^#{regex}/) }
+  met? { puts "CHECKING MET";path.p.grep(/^#{regex}/) }
 
   meet do
     buffer = ""
