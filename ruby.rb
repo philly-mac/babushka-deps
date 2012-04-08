@@ -19,7 +19,7 @@ dep "ruby 1.8.7" do
       shell "rm -rf ruby-1.8.7-p358" if File.exists?("ruby-1.8.7-p358")
       shell "tar -xjf ruby.tar.bz2"
       cd "ruby-1.8.7-p358" do
-        patch_file = "#{File.dirname(__FILE__)}/patches/ruby1.8-fix.patch"
+        patch_file = "#{babushka_root}/patches/ruby1.8-fix.patch"
         shell "patch -Np1 < #{patch_file}"
         shell "./configure --prefix=/usr/local/rbfu/rubies/1.8.7; make; make install"
       end

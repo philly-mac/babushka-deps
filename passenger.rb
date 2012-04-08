@@ -6,6 +6,6 @@ dep 'passenger gem', :template => 'gem' do
   end
 
   meet do
-    login_shell "gem install passenger", :as => 'philip'
+    log_shell "Installing passenger", "source #{babushka_root}/rbfu/rbfu-init; gem install passenger", :as => 'philip'
   end
 end
