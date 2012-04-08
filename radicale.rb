@@ -1,0 +1,1 @@
+dep 'radicale', :template => 'managed'
