@@ -10,6 +10,6 @@ dep 'passenger gem', :template => 'gem' do
   end
 
   meet do
-    log_shell "Installing passenger", "su - philip -c \"bash -l -c 'rbfu @1.9.3 gem uninstall passenger'\""
+    log_shell "Installing passenger", "su - philip -c \"bash -l -c 'rbfu @1.9.3 gem install passenger'\""
   end
 end
