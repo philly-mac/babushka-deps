@@ -6,11 +6,14 @@ def service_installed?(service)
   path = '/etc/rc.conf'
 
   File.readlines(path).each do |line|
-
+    puts "reading line #{line}"
     if daemons = /^DAEMONS=\(.+\)/.match(line)
       daemons = daemons[1]
-      /([!@\(\s]#{service}[\s\)])/.match(daemons)
+      puts "matcth #{daemons}"
+      return /[!@\(\s]#{service}[\s\)]/.match(daemons)
     end
+
+    return false
   end
 end
 
