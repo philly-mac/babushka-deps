@@ -8,13 +8,12 @@ dep 'sudoers' do
     buffer = ""
     File.readlines(path).each do |line|
       if /^(#.*)#{regex}/ =~ line
-        buffer << "#{line.sub($1, '')}\n"
+        buffer << "#{line.sub($1, '')}"
       else
         buffer << line
       end
     end
 
-    File.new(path, 'w').write(buffer)
-    sleep(2)
+    path.p.write(buffer)
   end
 end
