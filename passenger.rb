@@ -1,17 +1,11 @@
-dep 'ruby 1.9.3' do
-  requires 'rbfu inited'
+dep 'passenger gem', :template => 'gem' do
+  requires 'ruby 1.9.3'
 
   met? do
-    shell "env | grep -i GEM_HOME | grep 'rubies\/1.9.3'"
+    File.exists?("/usr/local/rbfu/rubies/1.9.3/bin/passenger")
   end
 
   meet do
-    shell "source $HOME/.profile"
-    shell "rbfu-env @1.9.3"
+    shell "Installing passenger", "/usr/local/rbfu/rubies/1.9.3/bin/gem install passenger", :as => 'philip'
   end
-
-end
-
-dep 'passenger gem', :template => 'gem' do
-  requires 'ruby 1.9.3'
 end

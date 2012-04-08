@@ -21,16 +21,3 @@ dep 'rbfu' do
     end
   end
 end
-
-dep 'rbfu inited' do
-  profile = '$HOME/.profile'.p
-  eval_cmd = 'eval "$(rbfu --init)"'
-
-  met? do
-    profile.grep eval_cmd
-  end
-
-  meet do
-    profile.append(eval_cmd)
-  end
-end

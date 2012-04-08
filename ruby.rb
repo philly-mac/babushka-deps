@@ -13,7 +13,10 @@ dep "ruby 1.8.7" do
     ensure_rbfu_directories
 
     cd "/usr/local/rbfu/src" do
-      shell "wget http://ftp.ruby-lang.org/pub/ruby/ruby-1.8.7-p358.tar.bz2 -O ruby.tar.bz2"
+      unless File.exists?("ruby.tar.bz2")
+        shell "wget http://ftp.ruby-lang.org/pub/ruby/ruby-1.8.7-p358.tar.bz2 -O ruby.tar.bz2"
+      end
+      shell "rm -rf ruby-1.8.7-p358" if File.exists?("ruby-1.8.7-p358")
       shell "tar -xjf ruby.tar.bz2"
       cd "ruby-1.8.7-p358" do
         patch_file = "#{File.dirname(__FILE__)}/patches/ruby1.8-fix.patch"
