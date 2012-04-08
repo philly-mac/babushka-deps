@@ -1,4 +1,4 @@
-dep 'iptables' :template => 'managed'
+dep 'iptables', :template => 'managed'
 
 dep 'iptables config' do
   requires 'iptables'
