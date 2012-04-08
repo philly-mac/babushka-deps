@@ -1,3 +1,7 @@
+def all_users
+  ['philip', 'fabian']
+end
+
 dep 'ruby-build' do
   met? { File.exists?('/usr/local/bin/ruby-build') }
   meet do
