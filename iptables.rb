@@ -15,6 +15,8 @@ dep 'iptables config' do
   meet do
     shell "iptables -F"
     shell "iptables -X"
+    shell "iptables -P OUTPUT ACCEPT"
+    shell "iptables -P FORWARD ACCEPT"
     shell "iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"
     shell "iptables -A INPUT -i lo -j ACCEPT"
     shell "iptables -A INPUT -p tcp --dport 19999 -j ACCEPT"
@@ -27,10 +29,8 @@ dep 'iptables config' do
     shell "iptables -A INPUT -j DROP"
     shell "iptables -A OUTPUT -p tcp --dport 9418 -j ACCEPT"
     shell "rc.d save iptables"
-    shell "iptables -P OUTPUT ACCEPT"
-    shell "iptables -P FORWARD ACCEPT"
-    shell "rc.d save iptables"
     shell "iptables -P INPUT DROP"
+    shell "rc.d save iptables"
   end
 
 end
