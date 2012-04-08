@@ -30,5 +30,6 @@ dep 'server base' do
     'ruby',
     'elasticsearch',
     'passenger gem',
-    'nginx'
+    'nginx',
+    'iptables config'
 end
