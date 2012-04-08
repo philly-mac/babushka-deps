@@ -6,7 +6,7 @@ end
 
 dep "ruby 1.8.7" do
   met? do
-    shell('eval "$(rbfu --init)"; rbfu-env @1.8.7') {|s| s.ok? }
+    File.exists?("/usr/local/rbfu/rubies/1.8.7/bin/ruby")
   end
 
   meet do
@@ -26,7 +26,7 @@ end
 
 dep "ruby 1.9.3" do
   met? do
-    shell('eval "$(rbfu --init)"; rbfu-env @1.9.3') {|s| s.ok? }
+    File.exists?("/usr/local/rbfu/rubies/1.9.3/bin/ruby")
   end
 
   meet do
