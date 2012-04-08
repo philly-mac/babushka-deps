@@ -39,5 +39,5 @@ dep 'server base' do
     'passenger gem',
     'nginx',
     'iptables config',
-    'postfix',
+    'postfix'
 end
