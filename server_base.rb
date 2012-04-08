@@ -3,6 +3,7 @@ dep 'java', :template => 'managed' do
 end
 
 dep 'rsync', :template => 'managed'
+dep 'postfix', :template => 'managed'
 dep 'htop', :template => 'managed'
 dep 'git', :template => 'managed'
 dep 'mongodb', :template => 'managed' do
@@ -31,5 +32,6 @@ dep 'server base' do
     'elasticsearch',
     'passenger gem',
     'nginx',
-    'iptables config'
+    'iptables config',
+    'postfix'
 end
