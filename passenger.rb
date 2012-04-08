@@ -6,6 +6,6 @@ dep 'passenger gem', :template => 'gem' do
   end
 
   meet do
-    log_shell "Installing passenger", "source /home/philip/.bashrc; gem install passenger", :as => 'philip'
+    login_shell "source /home/philip/.bashrc; gem install passenger", :as => 'philip'
   end
 end
