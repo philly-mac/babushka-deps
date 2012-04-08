@@ -6,10 +6,9 @@ dep 'sudoers' do
 
   meet do
     buffer = ""
-    puts path
     File.readlines(path).each do |line|
       if /^(#.*)#{regex}/ =~ line
-        buffer << "#{line.sub($1, '')}\r\n"
+        buffer << "#{line.sub($1, '')}\n"
       else
         buffer << line
       end
