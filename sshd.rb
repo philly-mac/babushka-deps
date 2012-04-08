@@ -5,5 +5,5 @@ dep 'sshd configure', :allowed_users do
     '/etc/ssh/sshd_config'.p.copy('/etc/ssh/sshd_config.backup')
     render_erb 'sshd/sshd_config.erb', :to => '/etc/ssh/sshd_config'
   end
-  after { shell 'rc.d sshd restart' }
+  after { shell 'rc.d restart sshd' }
 end
