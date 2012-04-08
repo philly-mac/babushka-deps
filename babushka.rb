@@ -12,9 +12,8 @@ def service_installed?(service)
       puts "matcth #{daemons}"
       return /[!@\(\s]#{service}[\s\)]/.match(daemons)
     end
-
-    return false
   end
+  return false
 end
 
 
