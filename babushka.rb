@@ -10,7 +10,7 @@ def service_installed?(service)
     if daemons = /^DAEMONS=\((.*)\)/.match(line)
       puts "matcth #{daemons.captures} #{daemons}"
       daemons = daemons[1]
-      puts "matcth #{daemons}"
+      puts "matcth #{daemons} #{/[!@\(\s]#{service}[\s\)]/.match(daemons)}"
       return /[!@\(\s]#{service}[\s\)]/.match(daemons)
     end
   end
