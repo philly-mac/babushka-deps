@@ -6,6 +6,7 @@ dep 'sudoers' do
 
   meet do
     buffer = ""
+    puts path
     path.readlines do |line|
       puts line
       if regex =~ /^##{regex}/
