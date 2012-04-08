@@ -14,8 +14,13 @@ dep 'mongodb auto start' do
   meet { mod_service('mongodb') }
 end
 
+dep 'linux-lts', :template => 'managed' do
+  provides []
+end
+
 dep 'server base' do
-  requires 'sudo.managed',
+  requires 'linux-lts',
+    'sudo.managed',
     'mongodb',
     'mongodb auto start',
     'rsync',
@@ -25,4 +30,5 @@ dep 'server base' do
     'ruby',
     'elasticsearch',
     'passenger gem'
+    'nginx'
 end
