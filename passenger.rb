@@ -6,6 +6,6 @@ dep 'passenger gem', :template => 'gem' do
   end
 
   meet do
-    shell "Installing passenger", "/usr/local/rbfu/rubies/1.9.3/bin/gem install passenger", :as => 'philip'
+    log_shell "Installing passenger", "/usr/local/rbfu/rubies/1.9.3/bin/gem install passenger", :as => 'philip'
   end
 end
