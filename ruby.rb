@@ -4,20 +4,9 @@ def ensure_rbfu_directories
   shell "chown -Rf philip:users /usr/local/rbfu"
 end
 
-def run_as(user, commands, message = nil)
-  commands = [commands] if commands.is_a?(String)
-  commands.each do |command|
-    if message
-      log_shell message, "sudo su #{user}; #{command}"
-    else
-      shell "sudo su -l #{user}; #{command}; exit"
-    end
-  end
-end
-
 dep "ruby 1.8.7" do
   met? do
-    File.exists?("/usr/local/rbfu/rubies/1.8.7")
+    shell('eval "$(rbfu --init)"; rbfu-env @1.8.7') {|s| s.ok? }
   end
 
   meet do
@@ -28,10 +17,8 @@ dep "ruby 1.8.7" do
       shell "tar -xjf ruby.tar.bz2", :as => 'philip'
       cd "ruby-1.8.7-p358" do
         patch_file = "#{File.dirname(__FILE__)}/patches/ruby1.8-fix.patch"
-        run_as 'philip',[
-          "patch -Np1 < ${srcdir}/fix.patch",
-          "./configure --prefix=/usr/local/rbfu/rubies/1.8.7; make; make install"
-        ]
+        shell "patch -Np1 < ${srcdir}/fix.patch", :as => 'philip'
+        shell "./configure --prefix=/usr/local/rbfu/rubies/1.8.7; make; make install", :as => 'philip'
       end
     end
   end
@@ -39,12 +26,12 @@ end
 
 dep "ruby 1.9.3" do
   met? do
-    File.exists?("/usr/local/rbfu/rubies/1.9.3")
+    shell 'eval "$(rbfu --init)"; rbfu-env @1.9.3' {|s| s.ok? }
   end
 
   meet do
     ensure_rbfu_directories
-    run_as 'philip', "ruby-build 1.9.3-p0 /usr/local/rbfu/rubies/1.9.3", "Installing ruby 1.9.3"
+    log_shell "Installing ruby 1.9.3", "ruby-build 1.9.3-p0 /usr/local/rbfu/rubies/1.9.3", :as => 'philip'
   end
 end
 
