@@ -27,6 +27,8 @@ dep 'server base' do
     'mongodb',
     'mongodb auto start',
     'rsync',
+    'grep',
+    'pcre'
     'htop',
     'git',
     'java',
@@ -36,6 +38,4 @@ dep 'server base' do
     'nginx',
     'iptables config',
     'postfix',
-    'grep',
-    'pcre'
 end
