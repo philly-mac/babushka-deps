@@ -4,7 +4,7 @@ dep 'iptables config' do
   requires 'iptables'
 
   met? do
-    shell("iptables -L | grep '--dport 2899'"){|s| s.ok? }
+    shell("iptables -L | grep 'dport\\ 2899'"){|s| s.ok? }
   end
 
   meet do
@@ -17,7 +17,7 @@ dep 'iptables config' do
     shell "iptables -A INPUT -p tcp --dport 22 -j ACCEPT"
     shell "iptables -A INPUT -p tcp --dport 2899 -j ACCEPT"
     shell "iptables -A INPUT -p tcp --dport 80 -j ACCEPT"
-    shell "iptables -A INPUT 5 -m limit --limit 5/min -j LOG --log-prefix \"iptables denied: \" --log-level 7"
+    shell "iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix \"iptables denied: \" --log-level 7"
     shell "iptables -A INPUT -j DROP"
     shell "rc.d save iptables"
     shell "iptables -P OUTPUT DROP"
