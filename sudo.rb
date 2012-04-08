@@ -9,7 +9,7 @@ dep 'sudoers' do
     puts path
     File.readlines(path).each do |line|
       if /^#.*#{regex}/ =~ line
-        buffer << "#{line.sub('#')}\r\n"
+        buffer << "#{line.sub('#', '')}\r\n"
       else
         buffer << line
       end
