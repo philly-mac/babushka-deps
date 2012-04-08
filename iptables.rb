@@ -9,7 +9,7 @@ dep 'iptables config' do
   requires 'iptables', 'iptables auto start'
 
   met? do
-    shell("iptables -L | grep 'dport\\ 2899'"){|s| s.ok? }
+    shell("iptables -L | grep 'iptables denied'"){|s| s.ok? }
   end
 
   meet do
