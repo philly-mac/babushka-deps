@@ -42,7 +42,7 @@ dep 'ruby' do
   requires 'git',
     'rbfu',
     'ruby-build',
-    'ruby 1.9.3',
+    'ruby 1.9.3'
 
   after do
     log_shell "Setting permissions on rbfu", "chown -Rf philip:users /usr/local/rbfu"
