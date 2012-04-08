@@ -26,7 +26,7 @@ end
 
 dep "ruby 1.9.3" do
   met? do
-    shell 'eval "$(rbfu --init)"; rbfu-env @1.9.3' {|s| s.ok? }
+    shell('eval "$(rbfu --init)"; rbfu-env @1.9.3') {|s| s.ok? }
   end
 
   meet do
