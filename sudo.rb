@@ -1,13 +1,13 @@
 dep 'sudoers' do
   regex = "%wheel\\sALL=\\(ALL\\)\\sALL"
-  path = '/etc/sudoers'.p
+  path = '/etc/sudoers'
 
-  met? { path.grep(/^#{regex}/) }
+  met? { path.p.grep(/^#{regex}/) }
 
   meet do
     buffer = ""
     puts path
-    path.readlines do |line|
+    File.readlines(path).each do |line|
       puts line
       if regex =~ /^##{regex}/
         buffer << "#{line.sub('#')}\r\n"
