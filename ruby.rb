@@ -43,7 +43,6 @@ dep 'ruby' do
     'rbfu',
     'ruby-build',
     'ruby 1.9.3',
-    'ruby 1.8.7'
 
   after do
     log_shell "Setting permissions on rbfu", "chown -Rf philip:users /usr/local/rbfu"

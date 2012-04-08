@@ -3,6 +3,7 @@ dep 'java', :template => 'managed' do
 end
 
 dep 'rsync', :template => 'managed'
+dep 'curl', :template => 'managed'
 dep 'grep', :template => 'managed'
 dep 'pcre', :template => 'managed'
 dep 'postfix', :template => 'managed'
@@ -28,7 +29,8 @@ dep 'server base' do
     'mongodb auto start',
     'rsync',
     'grep',
-    'pcre'
+    'pcre',
+    'curl',
     'htop',
     'git',
     'java',
