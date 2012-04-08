@@ -1,7 +1,3 @@
-def all_users
-  ['philip', 'fabian']
-end
-
 all_users.each do |user|
 
   dep "user #{user}"  do

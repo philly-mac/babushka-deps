@@ -12,8 +12,8 @@ dep 'sudoers' do
       else
         buffer << line
       end
+      puts buffer
     end
 
-    puts buffer
   end
 end
