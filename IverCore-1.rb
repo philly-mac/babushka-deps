@@ -1,4 +1,4 @@
-dep 'radicale', :template => 'radicale'
+dep 'radicale', :template => 'managed'
 
 dep 'IverCore-1' do
   requires 'user philip',
