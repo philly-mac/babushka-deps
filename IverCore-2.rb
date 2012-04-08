@@ -1,4 +1,6 @@
 dep 'IverCore-2' do
   requires  'user philip',
-    'server base'
+    'sudoers',
+    'server base',
+    'sshd configure'.with(:allowed_users => 'philip git')
 end

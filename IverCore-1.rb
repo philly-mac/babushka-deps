@@ -1,9 +1,9 @@
-dep 'radicale', :template => 'managed'
-
 dep 'IverCore-1' do
   requires 'user philip',
+    'sudoers',
     'user fabian',
     'server base',
-    'radicale'
+    'sshd configure'.with(:allowed_users => 'philip git fabian')
+    # 'radicale'
 
 end
