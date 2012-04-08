@@ -12,6 +12,7 @@ dep 'sudoers' do
       else
         buffer << line
       end
+      `#{buffer} > /tmp/test`
       puts buffer
     end
 
