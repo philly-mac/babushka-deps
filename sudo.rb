@@ -7,14 +7,16 @@ dep 'sudoers' do
   meet do
     buffer = ""
     path.readlines do |line|
+      puts line
       if regex =~ /^##{regex}/
         buffer << "#{line.sub('#')}\r\n"
       else
         buffer << line
       end
     end
-      `#{buffer} > /tmp/test`
-      puts buffer
+
+    `#{buffer} > /tmp/test`
+    puts buffer
 
   end
 end
