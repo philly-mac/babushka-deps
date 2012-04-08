@@ -7,3 +7,8 @@ dep 'sshd configure', :allowed_users do
   end
   after { shell 'rc.d restart sshd' }
 end
+
+dep 'sshd auto start' do
+  met? { service_installed?('sshd') }
+  meet { mod_service('sshd') }
+end

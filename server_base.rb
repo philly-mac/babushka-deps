@@ -9,6 +9,11 @@ dep 'mongodb', :template => 'managed' do
   provides 'mongod'
 end
 
+dep 'mongodb auto start' do
+  met? { service_installed?('mongodb') }
+  meet { mod_service('mongodb') }
+end
+
 dep 'server base' do
   requires 'sudo.managed',
     'mongodb',
