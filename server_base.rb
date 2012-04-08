@@ -17,6 +17,7 @@ end
 dep 'server base' do
   requires 'sudo.managed',
     'mongodb',
+    'mongodb auto start',
     'rsync',
     'htop',
     'git',
