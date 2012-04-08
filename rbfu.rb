@@ -21,3 +21,18 @@ dep 'rbfu' do
     end
   end
 end
+
+all_users.each do |user|
+  dep "rbfuify #{user} bashrc" do
+    path     = "/home/#{user}/.bashrc".p
+    contents = 'eval "$(rbfu --init)"'
+
+    met? do
+      path.grep(contents)
+    end
+
+    meet do
+      path.append(contents)
+    end
+  end
+end
