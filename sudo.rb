@@ -8,8 +8,8 @@ dep 'sudoers' do
     buffer = ""
     puts path
     File.readlines(path).each do |line|
-      if /^#.*#{regex}/ =~ line
-        buffer << "#{line.sub('#', '')}\r\n"
+      if /^(#.*)#{regex}/ =~ line
+        buffer << "#{line.sub($1, '')}\r\n"
       else
         buffer << line
       end
