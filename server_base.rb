@@ -29,6 +29,6 @@ dep 'server base' do
     'java',
     'ruby',
     'elasticsearch',
-    'passenger gem'
+    'passenger gem',
     'nginx'
 end
