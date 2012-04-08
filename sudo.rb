@@ -15,5 +15,6 @@ dep 'sudoers' do
     end
 
     File.new(path, 'w').write(buffer)
+    sleep(2)
   end
 end
