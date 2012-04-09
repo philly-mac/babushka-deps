@@ -44,4 +44,13 @@ dep "vim config" do
       end
     end
   end
+
+  after do
+    vim_users.each do |user|
+      unless user.first == 'root'
+        log_shell "Setting permissions on bash for #{user.first}", "chown -Rf #{user.first}:users #{user.last}/#{user.first}/.bash"
+      end
+    end
+
+  end
 end
