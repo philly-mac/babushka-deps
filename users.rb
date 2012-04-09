@@ -30,6 +30,8 @@ all_users.each do |user|
 end
 
 dep 'user www' do
+  requires 'group www'
+
   met? do
     '/etc/passwd'.p.grep(/^www/)
   end
@@ -37,5 +39,15 @@ dep 'user www' do
   meet do
     # key = "#{File.dirname(__FILE__)}/public-keys/#{user}.id_rsa.pub"
     shell "useradd -g www --system www"
+  end
+end
+
+dep 'group www' do
+  met? do
+    '/etc/group'.p.grep(/^www/)
+  end
+
+  meet do
+    shell "useradd --system www"
   end
 end
