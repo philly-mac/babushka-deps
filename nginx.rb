@@ -1,21 +1,21 @@
 dep 'nginx auto start' do
-  path    = "/etc/rc.local".p
-  content = "/usr/local/bin/nginx start"
-
-  met? { path.grep(content) }
-  meet { path.append("\n#{content}") }
+  met? { service_installed?('nginx') }
+  meet { mod_service('nginx') }
 end
 
-dep 'nginx binary' do
-  met? { babushka_config?('/usr/local/bin/nginx') }
+dep 'nginx rc.d' do
+  met? { babushka_config?('/etc/rc.d/nginx') }
   meet do
-    render_erb 'bin/nginx.erb', :to => '/usr/local/bin/nginx'
+    render_erb 'rc.d/nginx.erb', :to => '/etc/rc.d/nginx'
   end
-  after {shell 'chmod 755 /usr/local/bin/nginx'}
+  after do
+    shell 'chmod 700 /etc/rc.d/nginx'
+    shell 'rc.d restart nginx'
+  end
 end
 
 dep 'nginx' do
-  requires 'nginx auto start', 'nginx binary', 'user www'
+  requires 'nginx auto start', 'nginx rc.d', 'user www'
 
   met? { '/opt/nginx/sbin/nginx'.p.exists? }
 
