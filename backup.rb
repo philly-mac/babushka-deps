@@ -19,7 +19,7 @@ dep 's3cmd' do
 end
 
 dep 'backup' do
-  requires 'rsync', 's3cmd', 'backup cron'
+  requires 'rsync', 'ruby', 's3cmd', 'backup cron'
 
   met? do
     File.exists?("/opt/backup")
