@@ -3,8 +3,7 @@
 . /etc/rc.conf
 . /etc/rc.d/functions
 
-CMD=/opt/elasticsearch/bin/elasticsearch
-DAEMON=elasticsearch
+DAEMON=/opt/elasticsearch/bin/elasticsearch
 ARGS=
 
 [ -r /etc/conf.d/$DAEMON ] && . /etc/conf.d/$DAEMON
@@ -14,8 +13,8 @@ PID=`pgrep -f elasticsearch`
 case "$1" in
  start)
    stat_busy "Starting $DAEMON"
-   [ -z "$PID" ] && $CMD &>/dev/null
-   if [[ -n `pgrep -f elasticsearch` ]]; then
+   [ -z "$PID" ] && $DAEMON $ARGS &>/dev/null
+   if [ $? = 0 ]; then
      add_daemon $DAEMON
      stat_done
    else
@@ -36,7 +35,7 @@ case "$1" in
    ;;
  restart)
    $0 stop
-   sleep 5
+   sleep 1
    $0 start
    ;;
  *)

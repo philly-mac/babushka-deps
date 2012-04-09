@@ -3,8 +3,7 @@
 . /etc/rc.conf
 . /etc/rc.d/functions
 
-CMD=/opt/nginx/sbin/nginx
-DAEMON=nginx
+DAEMON=/opt/nginx/sbin/nginx
 ARGS=
 
 [ -r /etc/conf.d/$DAEMON ] && . /etc/conf.d/$DAEMON
@@ -14,8 +13,8 @@ PID=`pgrep nginx`
 case "$1" in
  start)
    stat_busy "Starting $DAEMON"
-   [[ -z "$PID" ]] && $CMD &>/dev/null
-   if [[ -n `pgrep nginx` ]]; then
+   [ -z "$PID" ] && $DAEMON $ARGS &>/dev/null
+   if [ $? = 0 ]; then
      add_daemon $DAEMON
      stat_done
    else
@@ -25,7 +24,7 @@ case "$1" in
    ;;
  stop)
    stat_busy "Stopping $DAEMON"
-   [[ -n "$PID" ]] && kill $PID &>/dev/null
+   [ -n "$PID" ] && kill $PID &>/dev/null
    if [ $? = 0 ]; then
      rm_daemon $DAEMON
      stat_done
@@ -36,7 +35,7 @@ case "$1" in
    ;;
  restart)
    $0 stop
-   sleep 5
+   sleep 1
    $0 start
    ;;
  *)
