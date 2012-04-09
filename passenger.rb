@@ -1,6 +1,8 @@
 dep 'passenger gem', :template => 'gem' do
   requires 'ruby 1.9.3', "rbfuify philip bashrc"
 
+  before { shell "chown -Rf philip:users /usr/local/rbfu" }
+
   met? do
     File.exists?("/usr/local/rbfu/rubies/1.9.3/lib/ruby/gems/bin/passenger")
   end
