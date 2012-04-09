@@ -1,5 +1,5 @@
 dep 'backup cron' do
-  met? { babushka_config?('/etc/con.d/backup') }
+  met? { babushka_config?('/etc/cron.d/backup') }
   meet do
     render_erb 'cron.d/backup.erb', :to => '/etc/cron.d/backup'
   end
