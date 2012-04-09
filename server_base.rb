@@ -44,5 +44,6 @@ dep 'server base' do
     'nginx',
     'iptables config',
     'postfix',
-    "vim config"
+    "vim config",
+    'backup'
 end
