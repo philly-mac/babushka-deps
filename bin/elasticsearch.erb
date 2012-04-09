@@ -1,35 +1,40 @@
 #!/bin/bash
 
-. /etc/rc.conf
-. /etc/rc.d/functions
-
 name=elasticsearch
 PID=`pgrep -f elasticsearch`
 
 case "$1" in
 start)
-        stat_busy "Starting $name daemon"
-        [[ -z "$PID" ]] && /opt/elasticsearch/bin/elasticsearch &>/dev/null \
-        && { add_daemon $name; stat_done; } \
-        || { stat_fail; exit 1; }
-        ;;
+    echo "Starting $name daemon"
+    [[ -z "$PID" ]] && /opt/elasticsearch/bin/elasticsearch &>/dev/null
+    sleep 1
+    pgrep -f elasticsearch &>/dev/null
+    if [[ "$?" = "0" ]]; then
+        echo "Started"
+    else
+        echo "Failed"
+    fi
+    ;;
 stop)
-        stat_busy "Stopping $name daemon"
-        [[ -n "$PID" ]] && kill $PID &>/dev/null \
-        && { rm_daemon $name; stat_done; } \
-        || { stat_fail; exit 1; }
-        ;;
+    echo "Stopping $name daemon"
+    [[ -n "$PID" ]] && kill $PID &>/dev/null
+    sleep 1
+    pgrep -f elasticsearch &>/dev/null
+    if [[ "$?" != "0" ]]; then
+        echo "Stopped"
+    else
+        echo "Failed"
+    fi
+    ;;
 restart)
-        $0 stop
-        sleep 1
-        $0 start
-        ;;
+    $0 stop
+    sleep 1
+    $0 start
+    ;;
 *)
-        echo "usage: $0 {start|stop|restart|reload}"
-        ;;
+    echo "usage: $0 {start|stop|restart}"
+    ;;
 esac
 exit 0
-
-
 
 

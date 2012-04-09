@@ -11,6 +11,7 @@ dep 'nginx binary' do
   meet do
     render_erb 'bin/nginx.erb', :to => '/usr/local/bin/nginx'
   end
+  after {shell 'chmod 755 /usr/local/bin/nginx'}
 end
 
 dep 'nginx' do

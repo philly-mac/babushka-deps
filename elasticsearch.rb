@@ -11,6 +11,7 @@ dep 'elasticsearch binary' do
   meet do
     render_erb 'bin/elasticsearch.erb', :to => '/usr/local/bin/elasticsearch'
   end
+  after {shell 'chmod 755 /usr/local/bin/elasticsearch'}
 end
 
 dep 'elasticsearch' do
