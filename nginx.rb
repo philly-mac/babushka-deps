@@ -15,7 +15,7 @@ dep 'nginx rc.d' do
 end
 
 dep 'nginx' do
-  requires 'nginx auto start', 'nginx rc.d'
+  requires 'nginx auto start', 'nginx rc.d', 'user www'
 
   met? { '/opt/nginx/sbin/nginx'.p.exists? }
 

@@ -4,7 +4,7 @@ end
 
 all_users.each do |user|
 
-  dep "user #{user}"  do
+  dep "user #{user}" do
 
     met? do
       '/etc/passwd'.p.grep(/^#{user}/)
@@ -27,4 +27,15 @@ all_users.each do |user|
     end
   end
 
+end
+
+dep 'user www' do
+  met? do
+    '/etc/passwd'.p.grep(/^www/)
+  end
+
+  meet do
+    # key = "#{File.dirname(__FILE__)}/public-keys/#{user}.id_rsa.pub"
+    shell "useradd -g www --system www"
+  end
 end
