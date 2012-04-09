@@ -14,7 +14,7 @@ PID=`pgrep nginx`
 case "$1" in
  start)
    stat_busy "Starting $DAEMON"
-   [ -z "$PID" ] && $CMD &>/dev/null
+   [[ -z "$PID" ]] && $CMD &>/dev/null
    if [[ -n `pgrep nginx` ]]; then
      add_daemon $DAEMON
      stat_done
@@ -25,7 +25,7 @@ case "$1" in
    ;;
  stop)
    stat_busy "Stopping $DAEMON"
-   [ -n "$PID" ] && kill $PID &>/dev/null
+   [[ -n "$PID" ]] && kill $PID &>/dev/null
    if [ $? = 0 ]; then
      rm_daemon $DAEMON
      stat_done
