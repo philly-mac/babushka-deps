@@ -21,7 +21,7 @@ dep "vimify users" do
 
       cd "#{path}" do
         unless "#{path}/.bashrc".p.grep(bash_include)
-          log_shell "vimifying #{user.first}","#{path}/.bashrc".p.append(bash_include)
+          log_shell "vimifying #{user.first}","#{path}/.bashrc".p.append("\n#{bash_include}")
         end
       end
     end
