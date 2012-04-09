@@ -1,4 +1,19 @@
+dep 'elasticsearch auto start' do
+  met? { service_installed?('elasticsearch') }
+  meet { mod_service('elasticsearch') }
+end
+
+dep 'elasticsearch rc.d' do
+  met? { babushka_config?('/etc/rc.d/elasticsearch') }
+  meet do
+    render_erb 'rc.d/elasticsearch.erb', :to => '/etc/rc.d/elasticsearch'
+  end
+  after { shell 'rc.d restart elasticsearch' }
+end
+
 dep 'elasticsearch' do
+  requires 'elasticsearch auto start', 'elasticsearch rc.d'
+
   elasticsearch_version = '0.19.1'
 
   met? do
