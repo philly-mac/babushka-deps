@@ -3,11 +3,11 @@
 DAEMON=elasticsearch
 
 function check_process {
-    pgrep -f elasticsearch &>/dev/null
+    test -r /var/run/$DAEMON.pid
 }
 
 case "$1" in
- start)
+start)
     echo "Starting $DAEMON"
     check_process
     [[ "$?" != "0" ]] && /opt/elasticsearch/bin/elasticsearch -p /var/run/$DAEMON.pid
@@ -20,7 +20,7 @@ case "$1" in
         exit 1
     fi
     ;;
- stop)
+stop)
     echo "Stopping $DAEMON"
     check_process
     [[ "$?" = "0" ]] && kill `cat /var/run/$DAEMON.pid`  &>/dev/null
@@ -32,11 +32,11 @@ case "$1" in
       echo "Failed to stop $DAEMON"
     fi
     ;;
- restart)
+restart)
     $0 stop
     sleep 1
     $0 start
     ;;
- *)
-   echo "usage: $0 {start|stop|restart}"
+*)
+    echo "usage: $0 {start|stop|restart}"
 esac
