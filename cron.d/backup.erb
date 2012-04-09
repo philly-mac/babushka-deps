@@ -1,2 +1,2 @@
-0 1 * * 1           root /opt/backup/backup full
-0 2 * * 2,3,4,5,6,7 root /opt/backup/backup inc
+0 1 * * 1           root /opt/backup/backup full | mail -s "Backup Full" philip@ivercore.com
+0 2 * * 2,3,4,5,6,7 root /opt/backup/backup inc  | mail -s "Backup Inc"  philip@ivercore.com

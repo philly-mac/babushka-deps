@@ -39,7 +39,6 @@ dep 'server base' do
     'git',
     'java',
     'ruby',
-    'elasticsearch',
     'passenger gem',
     'nginx',
     'iptables config',
