@@ -21,4 +21,9 @@ dep 'nginx' do
 
   meet { shell "rbfu @1.9.3 passenger-install-nginx-module  --auto --auto-download --prefix=/opt/nginx"}
 
+  after do
+    shell "mkdir /opt/nginx/run"
+    shell "mkdir /opt/nginx/logs"
+  end
+
 end
