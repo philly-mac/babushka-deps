@@ -3,6 +3,7 @@ dep 'java', :template => 'managed' do
 end
 
 dep 'rsync', :template => 'managed'
+dep 'tmux', :template => 'managed'
 dep 'curl', :template => 'managed'
 dep 'grep', :template => 'managed'
 dep 'pcre', :template => 'managed' do
@@ -33,6 +34,7 @@ dep 'server base' do
     'grep',
     'pcre',
     'curl',
+    'tmux',
     'htop',
     'git',
     'java',
@@ -41,5 +43,6 @@ dep 'server base' do
     'passenger gem',
     'nginx',
     'iptables config',
-    'postfix'
+    'postfix',
+    "vim config"
 end
