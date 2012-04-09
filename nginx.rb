@@ -8,7 +8,10 @@ dep 'nginx rc.d' do
   meet do
     render_erb 'rc.d/nginx.erb', :to => '/etc/rc.d/nginx'
   end
-  after { shell 'rc.d restart nginx' }
+  after do
+    shell 'chmod 700 /etc/rc.d/nginx'
+    shell 'rc.d restart nginx'
+  end
 end
 
 dep 'nginx' do
