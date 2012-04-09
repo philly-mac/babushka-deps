@@ -1,21 +1,21 @@
 dep 'elasticsearch auto start' do
-  met? { service_installed?('elasticsearch') }
-  meet { mod_service('elasticsearch') }
+  path    = "/etc/rc.local".p
+  content = "/usr/local/bin/elasticsearch start"
+
+  met? { path.grep(content) }
+  meet { path.append("\n#{content}") }
 end
 
-dep 'elasticsearch rc.d' do
-  met? { babushka_config?('/etc/rc.d/elasticsearch') }
+dep 'elasticsearch binary' do
+  met? { babushka_config?('/usr/local/bin/elasticsearch') }
   meet do
-    render_erb 'rc.d/elasticsearch.erb', :to => '/etc/rc.d/elasticsearch'
+    render_erb 'bin/elasticsearch.erb', :to => '/usr/local/bin/elasticsearch'
   end
-  after do
-    shell 'chmod 700 /etc/rc.d/elasticsearch'
-    shell 'rc.d restart elasticsearch'
-  end
+  after {shell 'chmod 755 /usr/local/bin/elasticsearch'}
 end
 
 dep 'elasticsearch' do
-  requires 'elasticsearch auto start', 'elasticsearch rc.d'
+  requires 'elasticsearch auto start', 'elasticsearch binary'
 
   elasticsearch_version = '0.19.1'
 
