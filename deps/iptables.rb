@@ -34,9 +34,19 @@ dep 'iptables config', :input_accept_list, :output_accept_list do
       shell "iptables -A OUTPUT -p tcp --dport #{port} -j ACCEPT"
     end
 
-    shell "rc.d save iptables"
     shell "iptables -P INPUT DROP"
-    shell "rc.d save iptables"
+    shell "sh -c \"iptables-save > /etc/iptables.rules\""
   end
 
+end
+
+dep 'iptables restore' do
+  met? {
+    "/etc.network.interfaces".p.grep("pre-up iptables-restore < /etc/iptables.rules") &&
+      "/etc.network.interfaces".p.grep("pre-down iptables-save > /etc/iptables.rules")
+  }
+
+  meet do
+   "iptables-save > /etc/iptables.rules"
+  end
 end
