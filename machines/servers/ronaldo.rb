@@ -9,5 +9,6 @@ dep 'ronaldo server' do
     'nginx',
     'user add to group'.with(:user => 'philip', :group => 'rvm')
     'java',
-    'graylog2 client'
+    'graylog2 client',
+    'user private key'.with(:user => 'philip')
 end

@@ -17,7 +17,7 @@ dep "user create", :user do
   after do
     shell "chmod 700 /home/#{user}/.ssh"
     shell "chmod 600 -Rf /home/#{user}/.ssh/*"
-    shell "chown -Rf #{user}:users /home/#{user}/.ssh"
+    shell "chown -Rf #{user}:#{user} /home/#{user}/.ssh"
   end
 end
 
@@ -89,4 +89,13 @@ dep "bash config", :user, :home_dir do
     end
   end
 
+end
+
+dep 'user private key', :user do
+
+  met? { "/home/#{user}/.ssh/id_rsa".p.exist? }
+
+  meet do
+    shell "ssh-keygen", :as => user
+  end
 end
