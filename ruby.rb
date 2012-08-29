@@ -25,6 +25,10 @@ dep "ruby 1.8.7" do
       end
     end
   end
+
+  after do
+    log_shell "Setting permissions on rbfu", "chown -Rf philip:users /usr/local/rbfu"
+  end
 end
 
 dep "ruby 1.9.3" do
