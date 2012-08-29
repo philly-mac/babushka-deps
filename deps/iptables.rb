@@ -1,12 +1,7 @@
 dep 'iptables', :template => 'managed'
 
-dep 'iptables auto start' do
-  met? { service_installed?('iptables') }
-  meet { mod_service('iptables') }
-end
-
 dep 'iptables config' do
-  requires 'iptables', 'iptables auto start'
+  requires 'iptables'
 
   met? do
     shell("iptables -L | grep 'iptables denied'"){|s| s.ok? }
