@@ -1,12 +1,12 @@
 dep 'ronaldo server' do
   requires 'server base',
-    'ruby',
-    'passenger gem',
-    'nginx',
-    'java',
     'imagemagick',
     'libxml2',
     'libxslt',
     'backup',
+    'ruby',
+    'passenger gem',
+    'nginx',
+    'java',
     'graylog2 client'
 end

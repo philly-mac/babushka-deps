@@ -1,0 +1,59 @@
+dep 'super-mac xubuntu laptop', :template => 'managed' do
+  requires 'ack',
+    'curl',
+    'grep',
+    'git',
+    'rvm local',
+    'iron',
+    'imagemagick',
+    'java',
+    'elasticsearch',
+    'libxml2',
+    'libxslt'
+
+  installs %w{
+    arandr
+    aspell-en
+    avant-window-navigator
+    caffeine
+    clementine
+    deluge
+    ecryptfs-utils
+    evince
+    exuberant-ctags
+    gimp
+    git
+    gitg
+    gparted
+    gzip
+    keepassx
+    libpq-dev
+    libreoffice
+    meld
+    nmap
+    ntop
+    ntp
+    openvpn
+    p7zip
+    pavucontrol
+    pgadmin3
+    pidgin
+    pidgin-musictracker
+    pidgin-plugin-pack
+    postgresql
+    rar
+    rsync
+    sshfs
+    synapse
+    tar
+    tmux
+    vim-gtk
+    vlc
+    wget
+    words
+    xfce4
+    xfce4-goodies
+    zip
+    zsh
+  }
+end

@@ -29,3 +29,15 @@ dep 'rvm' do
   end
 
 end
+
+dep 'rvm local' do
+  requires 'rvm requirements'
+
+  met? { "~/.rvm".p.exist? }
+
+  meet do
+    log_shell "Installing rvm (Ruby Version Manager)", "shell curl -L https://get.rvm.io | bash -s stable"
+  end
+
+end
+
