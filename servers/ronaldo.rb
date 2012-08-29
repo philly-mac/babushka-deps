@@ -17,9 +17,8 @@ dep 'ronaldo server' do
     'imagemagick',
     'libxml2',
     'libxslt',
-    'iptables config',
     'postfix',
     'forward email'.with(:user_dir => '/root', :email => 'philip@ivercore.com')
-    'sshd configure'.with(:allowed_users => 'philip git'),
-    'backup',
+    'sshd configure'.with(:allowed_users => 'philip'),
+    'backup'
 end
