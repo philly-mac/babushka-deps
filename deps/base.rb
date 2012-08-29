@@ -2,6 +2,7 @@ def babushka_root
   @babushka_root ||= File.dirname(__FILE__)
 end
 
+dep 'sudo',         :template => 'managed'
 dep 'rsync',        :template => 'managed'
 dep 'tmux',         :template => 'managed'
 dep 'curl',         :template => 'managed'
@@ -29,7 +30,7 @@ dep 'libxml2', :template => 'managed' do
 end
 
 dep "server base" do
-  requires 'sudo.managed',
+  requires 'sudo',
     "user create".with(:user => 'philip'),
     "user bashify".with(:user => 'root', :home_base => ''),
     "user bashify".with(:user => 'philip', :home_base => '/home'),

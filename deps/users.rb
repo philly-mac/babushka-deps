@@ -1,11 +1,13 @@
 dep "user create", :user do
 
+  requires 'sudo'
+
   met? { '/etc/passwd'.p.grep(/^#{user}/) }
 
   meet do
     key = "#{babushka_root}/public-keys/#{user}.id_rsa.pub"
 
-    shell "useradd -m -g #{user} -G audio,lp,optical,storage,video,wheel,games,power,scanner,rvm -s /bin/bash #{user}"
+    shell "useradd -m -g #{user} -G admin -s /bin/bash #{user}"
     shell "echo \"#{user}:password\"|chpasswd"
     shell "mkdir /home/#{user}/.ssh"
     shell "touch /home/#{user}/.ssh/authorized_keys"
@@ -38,6 +40,14 @@ dep 'group www' do
 
   meet do
     shell "useradd --system www"
+  end
+end
+
+dep 'user add to group', :user, :group do
+  met? { shell?("id #{user} shell | egrep '\(#{group}\)'") }
+
+  meet do
+    log_shell "Adding #{user} to #{group}", "usermod -a -G #{group} #{user}"
   end
 end
 
