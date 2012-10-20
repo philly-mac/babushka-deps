@@ -1,0 +1,14 @@
+server {
+  listen 80;
+
+  client_max_body_size 50M;
+
+  server_name edge edge.suitepad.de;
+
+  root /var/www/edge.suitepad.de/current/public;
+
+  passenger_enabled on;
+
+  access_log  logs/edge.suitepad.de/access.log  main;
+  error_log   logs/edge.suitepad.de/error.log;
+}

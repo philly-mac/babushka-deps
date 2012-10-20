@@ -1,0 +1,46 @@
+#!/bin/sh
+#
+### BEGIN INIT INFO
+# Provides:          mmonit
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start daemon at boot time
+# Description:       Enable service provided by daemon.
+### END INIT INFO
+
+NOHUP=`which nohup`
+MMONIT_CMD=/opt/mmonit/bin/mmonit
+CMD=$1
+
+start() {
+    echo "Starting mmonit ..."
+    $MMONIT_CMD 2>&1 &
+}
+
+stop() {
+    PID=`cat /opt/mmonit/logs/mmonit.pid`
+    echo "Stopping mmonit ($PID) ..."
+    kill $PID
+}
+
+restart() {
+    echo "Restarting mmonit ..."
+    stop
+    start
+}
+
+case "$CMD" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        restart
+        ;;
+    *)
+        echo "Usage $0 {start|stop|restart}"
+esac

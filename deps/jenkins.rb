@@ -1,9 +1,9 @@
 dep 'jenkins apt sources' do
 
-  met? { "/etc/apt/sources.list".p.grep("pkg.jenkins-ci.org") }
+  met? { shell?("egrep -q 'pkg.jenkins-ci.org' /etc/apt/sources.list") }
 
   meet do
-    shell "wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -"
+    shell "wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -"
     shell "echo \"\" >> /etc/apt/sources.list"
     shell "echo \"# Jenkins\" >> /etc/apt/sources.list"
     shell "echo \"deb http://pkg.jenkins-ci.org/debian binary/\" >> /etc/apt/sources.list"
@@ -13,6 +13,8 @@ dep 'jenkins apt sources' do
 end
 
 
-dep 'jenkins', :template => 'managed' do
+dep 'jenkins.managed' do
   requires "jenkins apt sources"
+
+  met? { '/usr/share/jenkins/jenkins.war'.p.exist? }
 end

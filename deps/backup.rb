@@ -1,30 +1,26 @@
-dep 'backup cron' do
-  met? { babushka_config?('/etc/cron.d/backup') }
+dep 'backup cron', :hour, :minute do
+  met? { generated_config?("/etc/cron.d/backup") }
 
   meet do
-    render_erb 'templates/cron.d/backup.erb', :to => '/etc/cron.d/backup'
-  end
-end
-
-dep 's3cmd' do
-
-  met? { "/opt/s3cmd".p.exist? }
-
-  meet do
-    cd '/opt' do
-      log_shell "Downloading s3cmd", "git clone https://github.com/s3tools/s3cmd.git"
-    end
+    render_erb_template "/cron.d/backup.erb", :to => '/etc/cron.d/backup'
   end
 end
 
 dep 'backup' do
-  requires 'rsync', 'ruby', 's3cmd', 'backup cron'
+  met? { shell?("gem list | egrep -q 'backup'") }
+  meet { log_shell "Installing backup", "gem install backup" }
+end
 
-  met? { "/opt/backup".p.exist? }
+dep "backup conf", :server do
+  requires "backup"
+
+  dir = '/opt/backup'
+  path = "#{dir}/config.rb"
+
+  met? { path.p.exist? && generated_config?(path) }
 
   meet do
-    cd '/opt' do
-      log_shell "Downloading backup", "git clone git://github.com/philly-mac/backup.git"
-    end
+    shell "mkdir -p #{dir}" unless dir.p.exist?
+    render_erb_template "/backup/#{server}.erb", :to => path
   end
 end

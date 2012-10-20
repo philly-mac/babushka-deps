@@ -1,8 +1,9 @@
-dep 'ack binary',     :template => 'managed' do
+dep 'ack binary', :template => 'managed' do
   installs 'ack-grep'
+  provides 'ack-grep'
 end
 
-dep 'ack'
+dep 'ack' do
   requires 'ack binary'
 
   met? { shell?("test -L /usr/bin/ack") }

@@ -1,0 +1,55 @@
+Backup::Model.new(:default, 'db-server-02 backup') do
+
+  split_into_chunks_of 250
+
+  archive :default do |archive|
+    archive.add     '/home'
+    archive.add     '/root'
+    archive.add     '/etc'
+    archive.add     '/opt'
+    archive.add     '/usr/local'
+  end
+
+  Backup::Database::PostgreSQL.defaults do |db|
+    db.username           = "postgres"
+    db.password           = "postgres"
+    db.host               = "192.168.0.2"
+    db.port               = 5432
+  end
+
+  database PostgreSQL do |db|
+    db.name               = "suitepad_edge"
+  end
+
+  database PostgreSQL do |db|
+    db.name               = "suitepad_staging"
+  end
+
+  database PostgreSQL do |db|
+    db.name               = "suitepad"
+  end
+
+  compress_with Bzip2 do |compression|
+    compression.best = true
+  end
+
+  encrypt_with OpenSSL do |encryption|
+    encryption.password = ''
+  end
+
+  store_with S3 do |s3|
+    s3.access_key_id      = ''
+    s3.secret_access_key  = ''
+    s3.region             = 'eu-west-1'
+    s3.bucket             = 'db-server-02.suitepad.de'
+    s3.path               = '/backups'
+    s3.keep               = 60
+  end
+
+  notify_by Mail do |mail|
+    mail.on_success = true
+    mail.on_warning = true
+    mail.on_failure = true
+  end
+
+end

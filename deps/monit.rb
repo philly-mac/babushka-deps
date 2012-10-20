@@ -1,17 +1,24 @@
 dep 'monit', :template => 'managed'
 
-dep 'monit auto start' do
-  met? { service_installed?('monit') }
-  meet { mod_service('monit') }
+dep "monit conf startup" do
+  path = "/etc/defaults/monit".p
+
+  met? { !path.exist? || (path.exist? && path.grep('startup=1')) }
+  meet { shell("sed -i'' -e 's/^startup=0$/startup=1/' '#{path}'") }
 end
 
-dep "monit conf" do
-  requires "monit"
+dep "monit conf", :email do
+  requires "monit", "monit conf startup"
 
-  met? { babushka_config?('/etc/monit/sshd_config') }
-  meet do
-    '/etc/ssh/sshd_config'.p.copy('/etc/ssh/sshd_config.backup')
-    render_erb 'sshd/sshd_config.erb', :to => '/etc/ssh/sshd_config'
-  end
-  after { shell 'rc.d restart sshd' }
+  met? { generated_config?("/etc/monit/monitrc") }
+  meet { render_erb_template "/monit/monit.erb", :to => "/etc/monit/monitrc" }
+end
+
+dep "monit conf app", :app_name do
+  requires "monit conf".with(:email => 'developers@suitepad.de')
+
+  path = "/etc/monit/conf.d/#{app_name}"
+
+  met? { generated_config?(path) }
+  meet { render_erb_template "/monit/#{app_name}.erb", :to => path }
 end

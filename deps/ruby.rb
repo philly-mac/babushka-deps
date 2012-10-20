@@ -1,8 +1,16 @@
 dep "ruby 1.9.3" do
-  met? { shell?("rvm 1.9.3") }
+
+  path = "/usr/local/bin/ruby".p
+  met? { path.exist? }
 
   meet do
-    log_shell "Installing ruby 1.9.3", "rvm install 1.9.3"
+    cd "/tmp" do
+      log_shell "Downloading ruby 1.9.3", "wget -c http://ftp.ruby-lang.org/pub/ruby/1.9/#{ruby_version}.tar.gz"
+      log_shell "Unpacking ruby 1.9.3", "tar -xzf #{ruby_version}.tar.gz"
+      cd ruby_version do
+        log_shell "compiling ruby 1.9.3", "./configure --prefix=/usr/local; make; make install"
+      end
+    end
   end
 end
 

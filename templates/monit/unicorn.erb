@@ -1,0 +1,9 @@
+check process unicorn-appname
+  with pidfile /var/www/appname/current/tmp/pids/unicorn.pid
+  start program = "/etc/init.d/unicorn.appname start"
+  stop program = "/etc/init.d/unicorn.appname stop"
+  group unicorn-appname
+
+  check file appname-restart with path /var/www/appname/current/tmp/restart.txt
+    if changed timestamp
+      then exec "/usr/sbin/monit -g unicorn-appname restart"
