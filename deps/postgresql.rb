@@ -1,8 +1,3 @@
-UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
-DROP DATABASE template1;
-CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UNICODE';
-UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
-
 dep 'postgresql client', :template => 'managed' do
   met? { '/usr/include/postgresql/libpq'.p.exist? }
 
