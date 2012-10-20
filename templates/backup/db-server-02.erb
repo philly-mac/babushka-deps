@@ -18,15 +18,15 @@ Backup::Model.new(:default, 'db-server-02 backup') do
   end
 
   database PostgreSQL do |db|
-    db.name               = "suitepad_edge"
+    db.name               = "edge"
   end
 
   database PostgreSQL do |db|
-    db.name               = "suitepad_staging"
+    db.name               = "staging"
   end
 
   database PostgreSQL do |db|
-    db.name               = "suitepad"
+    db.name               = ""
   end
 
   compress_with Bzip2 do |compression|
@@ -41,7 +41,7 @@ Backup::Model.new(:default, 'db-server-02 backup') do
     s3.access_key_id      = ''
     s3.secret_access_key  = ''
     s3.region             = 'eu-west-1'
-    s3.bucket             = 'db-server-02.suitepad.de'
+    s3.bucket             = 'db-server-02.<%= site_hostname %>'
     s3.path               = '/backups'
     s3.keep               = 60
   end

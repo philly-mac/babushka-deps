@@ -18,15 +18,15 @@ Backup::Model.new(:default, 'db-server-01 backup') do
   end
 
   database PostgreSQL do |db|
-    db.name               = "suitepad_edge"
+    db.name               = "edge"
   end
 
   database PostgreSQL do |db|
-    db.name               = "suitepad_staging"
+    db.name               = "staging"
   end
 
   database PostgreSQL do |db|
-    db.name               = "suitepad"
+    db.name               = ""
   end
 
   database MongoDB do |database|
@@ -49,7 +49,7 @@ Backup::Model.new(:default, 'db-server-01 backup') do
     s3.access_key_id      = ''
     s3.secret_access_key  = ''
     s3.region             = 'eu-west-1'
-    s3.bucket             = 'db-server-01.suitepad.de'
+    s3.bucket             = 'db-server-01.<%= site_hostname %>'
     s3.path               = '/backups'
     s3.keep               = 60
   end

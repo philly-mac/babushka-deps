@@ -1,5 +1,13 @@
 def system_users
-  ['suitepad','philip']
+  ['philip']
+end
+
+def site_hostname
+  'ivercore.com'
+end
+
+def group_email_address
+  'philip@ivercore.com'
 end
 
 def babushka_root

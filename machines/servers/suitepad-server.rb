@@ -1,8 +1,8 @@
 # ssh, web, openvpn, monit-web, alt-ssh, proxmox web
-dep 'suitepad-server' do
+dep 'root-server' do
   requires 'server base',
     'backup cron'.with(:hour => 0, :minute => 0),
-    'backup conf'.with(:server => 'suitepad-server'),
+    'backup conf'.with(:server => 'root-server'),
     'nginx.managed',
     'iptables config',
     'openvpn',

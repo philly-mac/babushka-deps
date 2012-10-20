@@ -15,7 +15,7 @@ dep "monit conf", :email do
 end
 
 dep "monit conf app", :app_name do
-  requires "monit conf".with(:email => 'developers@suitepad.de')
+  requires "monit conf".with(:email => group_email_address)
 
   path = "/etc/monit/conf.d/#{app_name}"
 

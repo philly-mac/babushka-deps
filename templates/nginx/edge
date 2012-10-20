@@ -3,12 +3,12 @@ server {
 
   client_max_body_size 50M;
 
-  server_name edge edge.suitepad.de;
+  server_name edge edge.<%= site_hostname %>;
 
-  root /var/www/edge.suitepad.de/current/public;
+  root /var/www/edge.<%= site_hostname %>/current/public;
 
   passenger_enabled on;
 
-  access_log  logs/edge.suitepad.de/access.log  main;
-  error_log   logs/edge.suitepad.de/error.log;
+  access_log  logs/edge.<%= site_hostname %>/access.log  main;
+  error_log   logs/edge.<%= site_hostname %>/error.log;
 }

@@ -22,7 +22,7 @@ Backup::Model.new(:default, 'search-server-01 backup') do
     s3.access_key_id      = ''
     s3.secret_access_key  = ''
     s3.region             = 'eu-west-1'
-    s3.bucket             = 'search-server-01.suitepad.de'
+    s3.bucket             = 'search-server-01.<%= site_hostname %>'
     s3.path               = '/backups'
     s3.keep               = 60
   end

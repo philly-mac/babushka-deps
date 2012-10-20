@@ -19,7 +19,7 @@ cd /tmp && \
 
 if [[ -e /usr/local/bin/ruby ]]; then
   bash -c "`curl https://babushka.me/up/hard`"
-  babushka sources -a suitepad git://github.com/philly-mac/babushka-deps.git
+  babushka sources -a philly-mac git://github.com/philly-mac/babushka-deps.git
 else
   echo "Ruby not installed"
 fi

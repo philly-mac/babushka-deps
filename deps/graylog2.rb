@@ -40,14 +40,14 @@ end
 
 dep "graylog2 client" do
 
-  met? { "/var/www/graylog2.suitepad.com".p.exist? }
+  met? { "/var/www/graylog2.#{site_hostname}".p.exist? }
 
   meet do
     cd "/tmp" do
       shell "wget https://github.com/downloads/Graylog2/graylog2-web-interface/#{graylog2_client_name}.tar.gz"
       shell "tar -xzf #{graylog2_client_name}.tar.gz"
-      shell "mv #{graylog2_client_name} graylog2.suitepad.com"
-      shell "mv graylog2.suitepad.com /var/www/"
+      shell "mv #{graylog2_client_name} graylog2.#{site_hostname}"
+      shell "mv graylog2.#{site_hostname} /var/www/"
     end
   end
 

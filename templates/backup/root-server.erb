@@ -1,4 +1,4 @@
-Backup::Model.new(:default, 'suitepad-server backup') do
+Backup::Model.new(:default, 'root-server backup') do
 
   split_into_chunks_of 250
 
@@ -22,7 +22,7 @@ Backup::Model.new(:default, 'suitepad-server backup') do
     s3.access_key_id      = ''
     s3.secret_access_key  = ''
     s3.region             = 'eu-west-1'
-    s3.bucket             = 'suitepad-server.suitepad.de'
+    s3.bucket             = 'root-server.<%= site_hostname %>'
     s3.path               = '/backups'
     s3.keep               = 60
   end

@@ -55,6 +55,5 @@ dep "server base" do
     'email forward'.with(:user_dir => '/root', :email => root_mail_forwarder),
     # push id_rsa/idrsa.pub keys to server
     'sshd configure'.with(:allowed_users => system_users.join(', ')),
-    'hosts configure suitepad network',
     'graylog2 rsyslog config'
 end
