@@ -1,50 +1,42 @@
-dep "user create", :user do
+dep "user create", :user, :system do
 
-  requires 'sudo'
+  if system.set?
 
-  met? { '/etc/passwd'.p.grep(/^#{user}/) }
+    met? { '/etc/passwd'.p.grep(/^#{user}/) }
 
-  meet do
-    key = "#{babushka_root}/public-keys/#{user}.id_rsa.pub"
+    meet do
+      shell "useradd -g #{user} --system #{user}"
+    end
 
-    shell "useradd -m -g #{user} -G admin -s /bin/bash #{user}"
-    shell "echo \"#{user}:password\"|chpasswd"
-    shell "mkdir /home/#{user}/.ssh"
-    shell "touch /home/#{user}/.ssh/authorized_keys"
-    shell "cat #{key} >> /home/#{user}/.ssh/authorized_keys"
+  else
+    requires 'sudo',
+      'group create'.with(:group => user, :system => false),
+      'group create'.with(:group => 'admin', :system => false)
+
+    met? { '/etc/passwd'.p.grep(/^#{user}/) }
+
+    meet do
+      key = "#{babushka_root}/public-keys/#{user}.id_rsa.pub"
+
+      shell "useradd -m -g #{user} -G admin -s /bin/bash #{user}"
+      shell "echo \"#{user}:password\"|chpasswd"
+      shell "mkdir /home/#{user}/.ssh"
+      shell "touch /home/#{user}/.ssh/authorized_keys"
+      shell "cat #{key} >> /home/#{user}/.ssh/authorized_keys"
+    end
+
+    after do
+      shell "chmod 700 /home/#{user}/.ssh"
+      shell "chmod 600 -Rf /home/#{user}/.ssh/*"
+      shell "chown -Rf #{user}:#{user} /home/#{user}/.ssh"
+    end
+
   end
 
-  after do
-    shell "chmod 700 /home/#{user}/.ssh"
-    shell "chmod 600 -Rf /home/#{user}/.ssh/*"
-    shell "chown -Rf #{user}:#{user} /home/#{user}/.ssh"
-  end
-end
-
-dep 'user www' do
-  requires 'group www'
-
-  met? do
-    '/etc/passwd'.p.grep(/^www/)
-  end
-
-  meet do
-    shell "useradd -g www --system www"
-  end
-end
-
-dep 'group www' do
-  met? do
-    '/etc/group'.p.grep(/^www/)
-  end
-
-  meet do
-    shell "useradd --system www"
-  end
 end
 
 dep 'user add to group', :user, :group do
-  met? { shell?("id #{user} shell | egrep '\(#{group}\)'") }
+  met? { shell?("id #{user} | egrep -q '\(#{group}\)'") }
 
   meet do
     log_shell "Adding #{user} to #{group}", "usermod -a -G #{group} #{user}"
@@ -96,6 +88,6 @@ dep 'user private key', :user do
   met? { "/home/#{user}/.ssh/id_rsa".p.exist? }
 
   meet do
-    shell "ssh-keygen", :as => user
+    shell "ssh-keygen -f /home/#{user}/.ssh/id_rsa", :as => user
   end
 end
