@@ -1,9 +1,13 @@
-sudo apt-get --purge remove sendmail-base sendmail-cf sendmail-doc
+dep 'postfix.managed' do
 
-dep 'postfix', :template => 'managed'
+  before do
+    shell "apt-get --purge remove sendmail-base sendmail-cf sendmail-doc"
+  end
+end
 
 dep 'postfix server config' do
-  requires 'postfix'
+  requires 'postfix.managed'
+
 end
 
 dep 'postfix client config' do
