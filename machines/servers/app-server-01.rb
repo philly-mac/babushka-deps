@@ -11,7 +11,6 @@ dep 'app-server-01' do
     'ruby',
     'passenger gem',
     'nginx from passenger',
-    'java',
     'redis lib',
     'graylog2 client',
     'postfix client config',
