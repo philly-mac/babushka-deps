@@ -6,6 +6,10 @@ def site_hostname
   'ivercore.com'
 end
 
+def root_mail_forwarder
+  'philip@ivercore.com'
+end
+
 def group_email_address
   'philip@ivercore.com'
 end
