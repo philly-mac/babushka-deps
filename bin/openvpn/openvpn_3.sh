@@ -5,7 +5,6 @@ source ./config.sh
 cd /etc/openvpn/easy-rsa/2.0/
 
 source ./vars
-source ./clean-all
 
 source ./build-key client
 source ./build-dh
@@ -25,7 +24,7 @@ cp server.conf /etc/openvpn/
 /etc/init.d/openvpn stop
 /etc/init.d/openvpn start
 
-OPENVPN_CLIENT_HOME=/home/${CLIENT_FOR}/openvpn/
+OPENVPN_CLIENT_HOME=/home/${USER}/openvpn/
 
 cd /etc/openvpn/easy-rsa/2.0/keys
 

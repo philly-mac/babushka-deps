@@ -44,26 +44,5 @@ expect {
     send "\r"
     exp_continue
   }
-
-  -regexp "A challenge password.*" {
-    send ".\r"
-    exp_continue
-  }
-
-  -regexp "An optional company name.*" {
-    send ".\r"
-    exp_continue
-  }
-
-  -regexp "Sign the certificate.*" {
-    send "y\r"
-    exp_continue
-  }
-
-  -regexp "1 out of 1 certificate requests certified, commit.*" {
-    send "y\r"
-    exp_continue
-  }
-
 }
 
