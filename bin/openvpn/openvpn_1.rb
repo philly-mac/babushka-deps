@@ -15,7 +15,7 @@ expects_data = [
     ["State or Province Name", "Berlin"],
     ["Locality Name", "Berlin"],
     ["Organization Name", "SuitePad"],
-    ["Organizational Unit Name", IT],
+    ["Organizational Unit Name", "IT"],
     ["Common Name", "."],
     ["Name []", "IT"],
     ["Email Address", "developers@suitepad.de"],
