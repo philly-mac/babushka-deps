@@ -31,7 +31,7 @@ expect {
   }
 
   -regexp "Common Name.*" {
-    send "\r"
+    send "suitepad.de\r"
     exp_continue
   }
 
@@ -41,7 +41,7 @@ expect {
   }
 
   -regexp "Email Address.*" {
-    send "\r"
+    send "developers@suitepad.de\r"
     exp_continue
   }
 
