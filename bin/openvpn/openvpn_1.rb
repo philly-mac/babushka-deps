@@ -36,11 +36,13 @@ expects << expects_data[0] + expects_data[1]
 expects << expects_data[0] + expects_data[1]
 
 scripts.each_with_index do |script, index|
+  puts "Script #{script}"
   PTY.spawn(script) do |reader, writer, pid|
 
     expects[index].each do |question, answer|
       result = reader.expect question
       puts question
+      puts answer
       writer.puts answer
     end
 
