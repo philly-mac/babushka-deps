@@ -8,6 +8,7 @@ cd /etc/openvpn/easy-rsa/2.0/
 
 source ./vars
 source ./build-key $KEY_USER
+source ./build-dh
 
 cd /etc/openvpn/easy-rsa/2.0/keys
 
