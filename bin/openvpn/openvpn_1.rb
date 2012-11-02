@@ -3,38 +3,46 @@
 require 'pty'
 require 'expect'
 
-PTY.spawn("./openvpn_1.sh") do |reader, writer, pid|
+scripts = [
+  "./openvpn_1.sh",
+  "./openvpn_2.sh",
+  "./openvpn_3.sh",
+]
 
-  result = reader.expect("Country Name")
-  puts result
-  writer.puts "DE"
+expects_data = [
+  [
+    ["Country Name", "DE"],
+    ["State or Province Name", "Berlin"],
+    ["Locality Name", "Berlin"],
+    ["Organization Name", "SuitePad"],
+    ["Organizational Unit Name", IT],
+    ["Common Name", "."],
+    ["Name []", "IT"],
+    ["Email Address", "developers@suitepad.de"],
+  ],
 
-  result = reader.expect "State or Province Name"
-  puts result
-  writer.puts "Berlin"
+  [
+    ["A challenge password", "."],
+    ["An optional company name", "."],
+    ["Sign the certificate", "y"],
+    ["1 out of 1 certificate requests certified, commit", "y"],
+  ]
 
-  result = reader.expect "Locality Name"
-  puts result
-  writer.puts "Berlin"
+]
 
-  result = reader.expect "Organization Name"
-  puts result
-  writer.puts "SuitePad"
+expects = []
+expects << expects_data[0]
+expects << expects_data[0] + expects_data[1]
+expects << expects_data[0] + expects_data[1]
 
-  result = reader.expect "Organizational Unit Name"
-  puts result
-  writer.puts "IT"
+scripts.each_with_index do |script, index|
+  PTY.spawn(script) do |reader, writer, pid|
 
-  result = reader.expect "Common Name"
-  puts result
-  writer.puts ""
+    expects[index].each do |question, answer|
+      result = reader.expect question
+      puts question
+      writer.puts answer
+    end
 
-  result = reader.expect "Name []"
-  puts result
-  writer.puts "IT"
-
-  result = reader.expect "Email Address"
-  puts result
-  writer.puts "developers@suitepad.de"
-
+  end
 end
