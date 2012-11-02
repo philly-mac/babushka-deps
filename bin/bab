@@ -1,13 +1,22 @@
-#!/usr/bin/env ruby
+#!/bin/env ruby
 
-if host = ARGV[0]
-  if system("ping #{host} -qc 1 &>/dev/null")
-    `ssh #{host} 'sudo su -; babushka source -u; babushka philly-mac:#{host}'`
-  else
-    puts "could not connect to host: #{host}"
-    exit 1
+hosts = %w{
+  db-server-01
+  db-server-02
+  app-server-01
+  monitor-server-01
+  search-server-01
+  mail-server-01
+}
+
+hosts = [ARGV[0]] if ARGV[0]
+
+threads = []
+
+hosts.each do |host|
+  threads << Thread.new(host) do |server_host|
+    puts `ssh -p 2899 @#{server_host} 'sudo babushka source -u; sudo babushka :#{server_host}'`
   end
-else
-  puts "You have not entered a host to run"
-  exit 1
 end
+
+threads.each { |thread| thread.join }
