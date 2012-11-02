@@ -3,7 +3,7 @@ babushka-deps
 
 setup on ubuntu 12.04
 
-apt-get update; apt-get install curl; bash -c "`curl https://raw.github.com/philly-mac/babushka-deps/master/bin/setup.sh`"
+apt-get update; apt-get install -y curl; bash -c "`curl https://raw.github.com/philly-mac/babushka-deps/master/bin/setup.sh`"
 
 
 # Servers
@@ -19,7 +19,7 @@ apt-get update; apt-get install curl; bash -c "`curl https://raw.github.com/phil
       # Search servers in the 10.0.0.4x range
       10.0.0.40              search-server-01
 
-      # Database servers in the 10.0.0.5x range
+      # Mail servers in the 10.0.0.5x range
       10.0.0.50              mail-server-01
 
 
