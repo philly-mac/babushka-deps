@@ -1,0 +1,7 @@
+# Forward all logs to Graylog2
+destination graylog2 { udp(10.0.0.13); };
+
+log {
+  source(s_src);
+  destination(graylog2);
+};

@@ -28,6 +28,9 @@ dep 'iptables config' do
     iptables_log_and_drop('INPUT')
     iptables_set_default('INPUT', 'DROP')
 
+    # make server pingable
+    # iptables -I INPUT 3 -p icmp --icmp-type 8 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+
     shell "sh -c \"iptables-save > /etc/iptables.rules\""
   end
 

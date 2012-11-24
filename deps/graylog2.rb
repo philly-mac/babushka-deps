@@ -53,14 +53,14 @@ dep "graylog2 client" do
 
 end
 
-dep 'graylog2 rsyslog config' do
+dep 'graylog2 syslog-ng config' do
 
-  requires 'rsyslog.managed'
+  requires 'syslog-ng.managed'
 
-  path = '/etc/rsyslog.d/graylog2'.p
+  path = '/etc/syslog-ng/conf.d/graylog2.conf'.p
 
   met? { path.exist? }
-  meet { render_erb_template "/rsyslog/graylog2.erb", :to => path }
-  after { shell 'service rsyslog restart'}
+  meet { render_erb_template "/syslog-ng/graylog2.conf.erb", :to => path }
+  after { shell 'service syslog-ng restart'}
 
 end
