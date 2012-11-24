@@ -8,7 +8,6 @@ dep 'app-server-01' do
     'libxml2',
     'libxslt',
     'postgresql client',
-    'ruby',
     'passenger gem',
     'nginx from passenger',
     'redis lib',

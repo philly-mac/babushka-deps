@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cp -R /usr/share/doc/openvpn/examples/easy-rsa/ /etc/openvpn
+cat ./whichopensslcnf > /etc/openvpn/easy-rsa/2.0/whichopensslcnf
 
 cd /etc/openvpn/easy-rsa/2.0/
 
