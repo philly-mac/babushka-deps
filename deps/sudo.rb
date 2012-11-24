@@ -1,5 +1,5 @@
 dep 'sudoers' do
-  ALL=(ALL) NOPASSWD: ALL
+  # ALL=(ALL) NOPASSWD: ALL
   regex = "%wheel\\sALL=\\(ALL\\)\\sALL"
   path = '/etc/sudoers'
 
