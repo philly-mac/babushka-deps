@@ -3,6 +3,6 @@ dep "rsyslog.managed" do
 
   after do
     shell "sed -i -e 's/^\$ModLoad imklog/#\$ModLoad imklog/g' /etc/rsyslog.conf"
-    service_restart('rsyslog')
+    Bab.service_restart('rsyslog')
   end
 end

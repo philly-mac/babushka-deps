@@ -1,8 +1,8 @@
 dep 'backup cron', :hour, :minute do
-  met? { generated_config?("/etc/cron.d/backup") }
+  met? { Bab.generated_config?("/etc/cron.d/backup") }
 
   meet do
-    render_erb_template "/cron.d/backup.erb", :to => '/etc/cron.d/backup'
+    BabFile.render_erb_template "/cron.d/backup.erb", :to => '/etc/cron.d/backup'
   end
 end
 
@@ -17,10 +17,10 @@ dep "backup conf", :server do
   dir = '/opt/backup'
   path = "#{dir}/config.rb"
 
-  met? { path.p.exist? && generated_config?(path) }
+  met? { path.p.exist? && Bab.generated_config?(path) }
 
   meet do
     shell "mkdir -p #{dir}" unless dir.p.exist?
-    render_erb_template "/backup/#{server}.erb", :to => path
+    BabFile.render_erb_template "/backup/#{server}.erb", :to => path
   end
 end

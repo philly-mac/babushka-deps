@@ -1,3 +1,15 @@
+def graylog2_version
+  "0.9.6"
+end
+
+def graylog2_client_name
+  "graylog2-web-interface-#{graylog2_version}"
+end
+
+def graylog2_server_name
+  "graylog2-server-#{graylog2_version}"
+end
+
 dep "graylog2 server" do
   requires "java", 'graylog2 server init script'
 
@@ -34,11 +46,11 @@ dep 'graylog2 server init script' do
   path = '/etc/init.d/graylog2-server'.p
 
   met? { path.exist? }
-  meet { render_erb_template "/init.d/graylog2-server.erb", :to => path }
+  meet { BabFile.render_erb_template "/init.d/graylog2-server.erb", :to => path }
 
 end
 
-dep "graylog2 client" do
+dep "graylog2 client", :site_hostname do
 
   met? { "/var/www/graylog2.#{site_hostname}".p.exist? }
 
@@ -60,7 +72,7 @@ dep 'graylog2 syslog-ng config' do
   path = '/etc/syslog-ng/conf.d/graylog2.conf'.p
 
   met? { path.exist? }
-  meet { render_erb_template "/syslog-ng/graylog2.conf.erb", :to => path }
+  meet { BabFile.render_erb_template "/syslog-ng/graylog2.conf.erb", :to => path }
   after { shell 'service syslog-ng restart'}
 
 end

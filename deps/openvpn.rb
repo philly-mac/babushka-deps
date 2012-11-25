@@ -12,7 +12,7 @@ dep 'openvpn config' do
 
     log "Installing openvpn"
     log "Deferring to Expect"
-    shell "#{babushka_root}/expect/openvpn.exp"
+    shell "#{Bab.babushka_root}/expect/openvpn.exp"
   end
 end
 

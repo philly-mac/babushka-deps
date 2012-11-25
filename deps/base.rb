@@ -44,7 +44,7 @@ dep 'libxml2', :template => 'managed' do
   installs "libxml2-dev"
 end
 
-dep "server base" do
+dep "server base", :system_users, :root_mail_forwarder do
   requires 'sudo'
   system_users.each {|user| requires 'user create'.with(:user => user)}
   requires 'curl',

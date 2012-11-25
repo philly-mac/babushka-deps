@@ -1,37 +1,31 @@
-def iptables_inputs
-  [
-    {:dport => 22},
-    {:dport => 80},
-    {:dport => 1194, :protocol => 'udp'},
-    {:dport => 2812},
-    {:dport => 2899},
-    {:dport => 8006},
-    {:dport => 19999},
-  ]
-end
+dep 'iptables.managed'
 
-dep 'iptables', :template => 'managed'
-
-dep 'iptables config' do
-  requires 'iptables'
+dep 'iptables config', :config do
+  requires 'iptables.managed'
 
   met? do
-    iptables_inputs.all? { |input| has_iptables_rule?('input', "ACCEPT.+#{input[:dport]}") }
+    config.to_a.all? do |input|
+      Iptables.has_rule?('input', "ACCEPT.+#{input[:dport]}")
+    end
   end
 
   meet do
-    safe_iptables_init
+    Iptables.safe_init
 
     options = {:protocol => 'tcp' , :action => 'ACCEPT'}
 
-    iptables_inputs.each { |input| add_iptables_rule('input', options.merge(input)) }
-    iptables_log_and_drop('INPUT')
-    iptables_set_default('INPUT', 'DROP')
+    config.to_a.each { |input| Iptables.add_rule('input', options.merge(input)) }
 
-    # make server pingable
-    # iptables -I INPUT 3 -p icmp --icmp-type 8 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+    Iptables.log_and_drop('INPUT')
+    Iptables.set_default('INPUT', 'DROP')
 
-    shell "sh -c \"iptables-save > /etc/iptables.rules\""
+    if config.to_a.all? { |input| Iptables.has_rule?('input', "ACCEPT.+#{input[:dport]}") }
+      shell "sh -c \"iptables-save > /etc/iptables.rules\""
+    else
+      Iptables.clear
+      log "Not all rules were applied. Rules have been cleared"
+    end
+
   end
 
   after do
