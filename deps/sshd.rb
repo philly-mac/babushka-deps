@@ -7,7 +7,7 @@ dep 'sshd configure', :allowed_users do
   meet do
     if allowed_users.set?
       path.p.copy('/etc/ssh/sshd_config.backup')
-      BabFile.render_erb_template "/sshd/sshd_config.erb", :to => path
+      BabFile.render_erb_template "/sshd/sshd_config.erb", :to => path, :allowed_users => allowed_users
     end
   end
 end
