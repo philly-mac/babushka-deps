@@ -1,6 +1,7 @@
 class BabFile
 
   extend Babushka::ShellHelpers
+  extend Babushka::RunHelpers
 
   def self.replace_line(filename, line, replacement)
     shell "sed -i'' -e 's/^#{Regexp.escape(line)}$/#{replacement}/' '#{filename}'"
