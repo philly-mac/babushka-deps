@@ -46,7 +46,7 @@ end
 
 dep "server base", :system_users, :root_mail_forwarder do
   requires 'sudo'
-  system_users.each {|user| requires 'user create'.with(:user => user)}
+  system_users.to_a.each {|user| requires 'user create'.with(:user => user)}
   requires 'curl',
     'grep',
     'tmux',
