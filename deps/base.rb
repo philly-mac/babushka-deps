@@ -57,6 +57,6 @@ dep "server base", :system_users, :root_mail_forwarder do
     'time zone'.with(:zone => 'Europe/Berlin'),
     'email forward'.with(:user_dir => '/root', :email => root_mail_forwarder),
     # push id_rsa/idrsa.pub keys to server
-    'sshd configure'.with(:allowed_users => system_users.join(', ')),
+    'sshd configure'.with(:allowed_users => system_users.to_a.join(', ')),
     'graylog2 syslog-ng config'
 end
