@@ -1,6 +1,7 @@
 class Bab
 
   extend Babushka::ShellHelpers
+  extend Babushka::RunHelpers
 
   def self.babushka_root
     @babushka_root ||= "#{File.dirname(__FILE__)}/.."
