@@ -8,7 +8,7 @@ dep "monit conf startup" do
 end
 
 dep "monit conf", :email do
-  requires "monit", "monit conf startup"
+  requires "monit.managed", "monit conf startup"
 
   met? { generated_config?("/etc/monit/monitrc") }
   meet { render_erb_template "/monit/monit.erb", :to => "/etc/monit/monitrc" }
