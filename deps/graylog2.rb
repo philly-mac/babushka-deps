@@ -46,7 +46,7 @@ dep 'graylog2 server init script' do
   path = '/etc/init.d/graylog2-server'.p
 
   met? { path.exist? }
-  meet { BabFile.render_erb_template "/init.d/graylog2-server.erb", :to => path }
+  meet { render_erb_template "/init.d/graylog2-server.erb", :to => path }
 
 end
 
@@ -72,7 +72,7 @@ dep 'graylog2 syslog-ng config' do
   path = '/etc/syslog-ng/conf.d/graylog2.conf'.p
 
   met? { path.exist? }
-  meet { BabFile.render_erb_template "/syslog-ng/graylog2.conf.erb", :to => path }
+  meet { render_erb_template "/syslog-ng/graylog2.conf.erb", :to => path }
   after { shell 'service syslog-ng restart'}
 
 end

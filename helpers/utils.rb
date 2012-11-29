@@ -5,7 +5,7 @@ end
 def render_erb_template(file_path, options = {})
   file_path "/#{file_path}" unless file_path.strip =~ /^\//
   file_path << '.erb'       unless file_path.strip =~ /\.erb$/
-  render_erb("#{Bab.babushka_root}/templates/#{file_path}", options)
+  render_erb("#{babushka_root}/templates/#{file_path}", options)
 end
 
 def babushka_root

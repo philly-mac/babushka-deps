@@ -10,8 +10,8 @@ end
 dep "monit conf", :email do
   requires "monit", "monit conf startup"
 
-  met? { Bab.generated_config?("/etc/monit/monitrc") }
-  meet { BabFile.render_erb_template "/monit/monit.erb", :to => "/etc/monit/monitrc" }
+  met? { generated_config?("/etc/monit/monitrc") }
+  meet { render_erb_template "/monit/monit.erb", :to => "/etc/monit/monitrc" }
 end
 
 dep "monit conf app", :app_name, :group_email_address do
@@ -19,6 +19,6 @@ dep "monit conf app", :app_name, :group_email_address do
 
   path = "/etc/monit/conf.d/#{app_name}"
 
-  met? { Bab.generated_config?(path) }
-  meet { BabFile.render_erb_template "/monit/#{app_name}.erb", :to => path }
+  met? { generated_config?(path) }
+  meet { render_erb_template "/monit/#{app_name}.erb", :to => path }
 end
