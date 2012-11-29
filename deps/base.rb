@@ -8,6 +8,7 @@ dep 'git',          :template => 'managed'
 dep 'radicale',     :template => 'managed'
 dep "vim",          :template => "managed"
 
+dep 'syslog-ng.managed'
 
 dep 'rsyslog', :template => "managed" do
   provides ['rsyslogd']
@@ -44,6 +45,7 @@ dep 'libxml2', :template => 'managed' do
   installs "libxml2-dev"
 end
 
+
 dep "server base", :system_users, :root_mail_forwarder do
   requires 'sudo'
   system_users.to_a.each {|user| requires 'user create'.with(:user => user)}
@@ -57,6 +59,5 @@ dep "server base", :system_users, :root_mail_forwarder do
     'time zone'.with(:zone => 'Europe/Berlin'),
     'email forward'.with(:user_dir => '/root', :email => root_mail_forwarder),
     # push id_rsa/idrsa.pub keys to server
-    'sshd configure'.with(:allowed_users => system_users.to_a.join(', ')),
-    'graylog2 syslog-ng config'
+    'sshd configure'.with(:allowed_users => system_users.to_a.join(', '))
 end

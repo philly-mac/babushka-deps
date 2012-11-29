@@ -52,6 +52,8 @@ end
 
 dep "graylog2 client", :site_hostname do
 
+  requires 'graylog2 syslog-ng config'
+
   met? { "/var/www/graylog2.#{site_hostname}".p.exist? }
 
   meet do
@@ -76,3 +78,5 @@ dep 'graylog2 syslog-ng config' do
   after { shell 'service syslog-ng restart'}
 
 end
+
+
