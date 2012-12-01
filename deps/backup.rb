@@ -11,7 +11,7 @@ dep 'backup' do
   meet { log_shell "Installing backup", "gem install backup" }
 end
 
-dep "backup conf", :server do
+dep "backup conf", :server, :site_hostname do
   requires "backup"
 
   dir = '/opt/backup'
