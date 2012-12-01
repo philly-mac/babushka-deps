@@ -9,6 +9,7 @@ dep 'radicale',     :template => 'managed'
 dep "vim",          :template => "managed"
 
 dep 'syslog-ng.managed'
+dep 'openvpn.managed'
 
 dep 'rsyslog', :template => "managed" do
   provides ['rsyslogd']
