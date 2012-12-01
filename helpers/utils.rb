@@ -9,7 +9,11 @@ def render_erb_template(file_path, options = {})
 end
 
 def babushka_root
-  @babushka_root ||= "#{File.dirname(__FILE__)}/.."
+  unless File.exist?('/tmp/babushka_root')
+    puts "No /tmp/babushka_root set"
+    exit(1)
+  end
+  @babushka_root ||= `cat /tmp/babushka_root`.strip
 end
 
 def generated_config?(path)
