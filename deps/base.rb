@@ -1,11 +1,10 @@
-dep 'sudo',         :template => 'managed'
-dep 'rsync',        :template => 'managed'
-dep 'tmux',         :template => 'managed'
-dep 'curl',         :template => 'managed'
-dep 'grep',         :template => 'managed'
-dep 'htop',         :template => 'managed'
-dep 'git',          :template => 'managed'
-dep 'radicale',     :template => 'managed'
+dep 'sudo.managed'
+dep 'rsync.managed'
+dep 'tmux.managed'
+dep 'curl.managed'
+dep 'grep.managed'
+dep 'htop.managed'
+dep 'git.managed'
 dep "vim",          :template => "managed"
 
 dep 'syslog-ng.managed'
@@ -48,15 +47,15 @@ end
 
 
 dep "server base", :system_users, :root_mail_forwarder do
-  requires 'sudo'
+  requires 'sudo.managed'
   system_users.to_a.each {|user| requires 'user create'.with(:user => user)}
-  requires 'curl',
-    'grep',
-    'tmux',
-    'htop',
-    'rsync',
+  requires 'curl.managed',
+    'grep.managed',
+    'tmux.managed',
+    'htop.managed',
+    'rsync.managed',
+    'git.managed',
     'ack',
-    'git',
     'time zone'.with(:zone => 'Europe/Berlin'),
     'email forward'.with(:user_dir => '/root', :email => root_mail_forwarder),
     # push id_rsa/idrsa.pub keys to server

@@ -12,7 +12,7 @@ apt-get -y install expect libcurl4-openssl-dev curl git build-essential \
 
 cd /tmp && \
   wget -c http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p327.tar.bz2 && \
-  tar -xzf ruby-1.9.3-p327.tar.gz && \
+  tar -xjf ruby-1.9.3-p327.tar.bz2 && \
   cd ruby-1.9.3-p327
 
 ./configure --prefix=/usr/local; make; make install
