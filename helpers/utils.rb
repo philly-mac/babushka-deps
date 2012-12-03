@@ -9,12 +9,6 @@ def render_erb_template(file_path, options = {})
 end
 
 def babushka_root
-  unless File.exist?('/tmp/babushka_root')
-    puts "No /tmp/babushka_root set"
-    exit(1)
-  end
-
-  def set_babushka_root
   @babushka_root ||= "#{File.dirname(__FILE__)}/.."
 end
 
