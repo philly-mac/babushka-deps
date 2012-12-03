@@ -10,7 +10,7 @@ dep 'app-server-01' do
     'libxslt',
     'postgresql client',
     'passenger gem',
-    'nginx from passenger',
+    # 'nginx from passenger',
     'redis lib',
     'graylog2 client'.with(:site_hostname => 'ivercore.com'),
     'postfix client config',
