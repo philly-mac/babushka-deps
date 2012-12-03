@@ -14,7 +14,7 @@ dep 'hosts add', :host_names, :ip_address do
 
       shell "cat > #{path}", :input => file_lines
     else
-      shell "cat >> #{path}", :input => "#{ip_address}          #{host_names}\r\n"
+      shell "cat >> #{path}", :input => "#{ip_address}          #{host_names}\n"
     end
   end
 

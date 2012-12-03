@@ -3,8 +3,6 @@ dep 'db-server-01' do
   group_email_address = 'philip@ivercore.com'
 
   requires    'server base'.with(:system_users => ['philip'], :root_mail_forwarder => 'philip@ivercore.com'),
-    'backup cron'.with(:hour => 1, :minute => 30),
-    'backup conf'.with(:server => 'db-server-01', :site_hostname => 'ivercore.com'),
     'postgresql server',
     'mongodb',
     'redis server',
