@@ -13,7 +13,6 @@ dep 'app-server-01' do
     # 'nginx from passenger',
     'redis lib',
     'graylog2 client'.with(:site_hostname => 'ivercore.com'),
-    'postfix client config',
     'monit conf app'.with(:app_name => 'sshd', :group_email_address => group_email_address),
     'monit conf app'.with(:app_name => 'passenger_nginx', :group_email_address => group_email_address)
 end
