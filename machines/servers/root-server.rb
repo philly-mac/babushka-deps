@@ -13,10 +13,7 @@ dep 'root-server' do
         {:type => :append, :dport => 22},
         {:type => :append, :dport => 80},
         {:type => :append, :dport => 1194, :protocol => 'udp'},
-        {:type => :append, :dport => 2812},
         {:type => :append, :dport => 2899},
-        {:type => :append, :dport => 8006},
-        {:type => :append, :dport => 19999},
       ]
     ),
     'openvpn',
