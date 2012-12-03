@@ -24,9 +24,9 @@ dep "mongodb", :template => "managed" do
 end
 
 dep 'imagemagick',  :template => 'managed' do
-  installs "imagemagick",
-    "libgraphicsmagick1-dev",
-    "graphicsmagick-libmagick-dev-compat"
+  # installs "imagemagick",
+  #   "libgraphicsmagick1-dev",
+  #   "graphicsmagick-libmagick-dev-compat"
   end
 
 dep 'java', :template => 'managed' do
