@@ -5,9 +5,10 @@ dep 'nginx from passenger' do
 
   meet do
     cd '/tmp' do
-      if !"/tmp/rails-nginx-passenger-ubuntu".p.exists?
-        shell "git clone git://github.com/jnstq/rails-nginx-passenger-ubuntu.git"
+      if "/tmp/rails-nginx-passenger-ubuntu".p.exists?
+        shell "rm -rf rails-nginx-passenger-ubuntu"
       end
+      shell "git clone git://github.com/jnstq/rails-nginx-passenger-ubuntu.git"
       shell "mv rails-nginx-passenger-ubuntu/nginx/nginx /etc/init.d/nginx"
       shell "chown root:root /etc/init.d/nginx"
     end
