@@ -8,7 +8,6 @@ dep 'db-server-01' do
     'postgresql server',
     'mongodb',
     'redis server',
-    'postfix client config',
     'monit conf app'.with(:app_name => 'sshd',       :group_email_address => group_email_address),
     'monit conf app'.with(:app_name => 'postgresql', :group_email_address => group_email_address),
     'monit conf app'.with(:app_name => 'mongodb',    :group_email_address => group_email_address),

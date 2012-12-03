@@ -3,6 +3,7 @@ dep 'root-server' do
   group_email_address = 'philip@ivercore.com'
 
   requires    'server base'.with(:system_users => ['philip'], :root_mail_forwarder => 'philip@ivercore.com'),
+    'time zone'.with(:zone => 'Europe/Berlin'),
     'backup cron'.with(:hour => 0, :minute => 0),
     'backup conf'.with(:server => 'root-server'),
     'nginx.managed',
