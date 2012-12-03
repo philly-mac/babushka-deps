@@ -57,7 +57,7 @@ dep "server base", :system_users, :root_mail_forwarder do
     'ack',
     'time zone'.with(:zone => 'Europe/Berlin'),
     'email forward'.with(:user_dir => '/root', :email => root_mail_forwarder),
-    'sshd configure'.with(:allowed_users => system_users.to_a.join(', '),
+    'sshd configure'.with(:allowed_users => system_users.to_a.join(', ')),
     'hosts add'.with(:host_names => 'db-server-01',      :ip_address => '10.0.3.10'),
     'hosts add'.with(:host_names => 'db-server-02',      :ip_address => '10.0.3.11'),
     'hosts add'.with(:host_names => 'app-server-01',     :ip_address => '10.0.3.20'),
@@ -65,5 +65,4 @@ dep "server base", :system_users, :root_mail_forwarder do
     'hosts add'.with(:host_names => 'monitor-server-01', :ip_address => '10.0.3.30'),
     'hosts add'.with(:host_names => 'search-server-01',  :ip_address => '10.0.3.40'),
     'hosts add'.with(:host_names => 'mail-server-01',    :ip_address => '10.0.3.50')
-  )
 end
