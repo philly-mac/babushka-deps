@@ -5,7 +5,7 @@ dep 'app-server-01' do
   requires    'server base'.with(:system_users => ['philip'], :root_mail_forwarder => 'philip@ivercore.com'),
     'backup cron'.with(:hour => 1, :minute => 0),
     'backup conf'.with(:server => 'app-server-01'),
-    'imagemagick',
+    # 'imagemagick',
     'libxml2',
     'libxslt',
     'postgresql client',
