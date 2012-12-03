@@ -16,7 +16,6 @@ dep 'root-server' do
         {:type => :append, :dport => 2899},
       ]
     ),
-    'openvpn',
     'mongodb',
     'postfix client config',
     'monit conf app'.with(:app_name => 'nginx',   :group_email_address => group_email_address),
