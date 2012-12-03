@@ -9,5 +9,5 @@ dep 'monitor-server-01' do
     'words.managed',
     'monit conf app'.with(:app_name => 'sshd',            :group_email_address => group_email_address),
     'monit conf app'.with(:app_name => 'graylog2-server', :group_email_address => group_email_address),
-    'monit conf app'.with(:app_name => 'jenkins',         :group_email_address => group_email_address),
+    'monit conf app'.with(:app_name => 'jenkins',         :group_email_address => group_email_address)
 end
