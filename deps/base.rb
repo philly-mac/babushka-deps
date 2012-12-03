@@ -26,9 +26,8 @@ end
 dep 'imagemagick',  :template => 'managed' do
   installs "imagemagick",
     "libgraphicsmagick1-dev",
-    "graphicsmagick-libmagick-dev-compat",
-    "libmagickwand-dev"
-end
+    "graphicsmagick-libmagick-dev-compat"
+  end
 
 dep 'java', :template => 'managed' do
   installs "openjdk-7-jre"
