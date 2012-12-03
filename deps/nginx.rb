@@ -4,6 +4,7 @@ dep 'nginx from passenger' do
   met? { '/opt/nginx/sbin/nginx'.p.exists? }
 
   meet do
+    shell "rvm 1.9.3@global; passenger-install-nginx-module  --auto --auto-download --prefix=/opt/nginx"
     cd '/tmp' do
       if "/tmp/rails-nginx-passenger-ubuntu".p.exists?
         shell "rm -rf rails-nginx-passenger-ubuntu"
