@@ -16,7 +16,6 @@ dep 'nginx from passenger' do
   end
 
   after do
-    # Change the line in the nginx script so the run dir points to /opt/nginx/run
     log "For now you have to manually change it so that the run dir points to /opt/nginx/run"
   end
 
