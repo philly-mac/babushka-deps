@@ -13,7 +13,9 @@ def babushka_root
     puts "No /tmp/babushka_root set"
     exit(1)
   end
-  @babushka_root ||= `cat /tmp/babushka_root`.strip
+
+  def set_babushka_root
+  @babushka_root ||= "#{File.dirname(__FILE__)}/.."
 end
 
 def generated_config?(path)
