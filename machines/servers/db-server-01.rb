@@ -6,6 +6,7 @@ dep 'db-server-01' do
     'postgresql server',
     'mongodb',
     'redis server',
+    'graylog2 rsyslog config',
     'monit conf app'.with(:app_name => 'sshd',       :group_email_address => group_email_address),
     'monit conf app'.with(:app_name => 'postgresql', :group_email_address => group_email_address),
     'monit conf app'.with(:app_name => 'mongodb',    :group_email_address => group_email_address),

@@ -1,26 +1,25 @@
 dep 'backup cron', :hour, :minute do
-  met? { generated_config?("/etc/cron.d/backup") }
+
+  path = "/etc/cron.d/backup"
+
+  met? { generated_config?(path) }
 
   meet do
-    render_erb_template "/cron.d/backup.erb", :to => '/etc/cron.d/backup'
+    render_erb_template "/cron.d/backup.erb", :to => path
+    shell "chmod 600 #{path}"
   end
 end
 
-dep 'backup' do
-  met? { shell?("gem list | egrep -q 'backup'") }
-  meet { log_shell "Installing backup", "gem install backup" }
-end
-
-dep "backup conf", :server, :site_hostname do
-  requires "backup"
+dep "backup conf", :site_hostname do
 
   dir = '/opt/backup'
-  path = "#{dir}/config.rb"
+  path = "#{dir}/backup"
 
   met? { path.p.exist? && generated_config?(path) }
 
   meet do
     shell "mkdir -p #{dir}" unless dir.p.exist?
-    render_erb_template "/backup/#{server}.erb", :to => path
+    render_erb_template "/backup/backup.erb", :to => path
+    shell "chmod 755 #{path}"
   end
 end

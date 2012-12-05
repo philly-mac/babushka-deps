@@ -1,0 +1,14 @@
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# Get notified when something happens inside other windows
+setw -g monitor-activity on
+set -g visual-activity on
+
+# Hightlight the current window with this color
+set-window-option -g window-status-current-bg yellow
+
+# Pane selection with mouse
+set-option -g mouse-select-pane on

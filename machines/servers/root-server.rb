@@ -17,6 +17,7 @@ dep 'root-server' do
       ]
     ),
     'mongodb',
+    'graylog2 rsyslog config',
     'monit conf app'.with(:app_name => 'nginx',   :group_email_address => group_email_address),
     'monit conf app'.with(:app_name => 'sshd',    :group_email_address => group_email_address),
     'monit conf app'.with(:app_name => 'apache',  :group_email_address => group_email_address),

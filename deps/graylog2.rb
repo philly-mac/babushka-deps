@@ -52,7 +52,7 @@ end
 
 dep "graylog2 client", :site_hostname do
 
-  requires 'graylog2 syslog-ng config'
+  requires 'graylog2 rsyslog config'
 
   met? { "/var/www/graylog2.#{site_hostname}".p.exist? }
 
@@ -75,6 +75,18 @@ dep 'graylog2 syslog-ng config' do
 
   met? { path.exist? }
   meet { render_erb_template "/syslog-ng/graylog2.conf.erb", :to => path }
+  after { shell 'service syslog-ng restart'}
+
+end
+
+dep 'graylog2 rsyslog config' do
+
+  requires 'rsyslog.managed'
+
+  path = '/etc/syslog-ng/conf.d/graylog2.conf'.p
+
+  met? { path.exist? }
+  meet { render_erb_template "/rsyslog/graylog2.conf.erb", :to => path }
   after { shell 'service syslog-ng restart'}
 
 end

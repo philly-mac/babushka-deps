@@ -1,1 +1,2 @@
-<%= minute %> <%= hour %> * * 1           root `which backup` perform -t default
+0 0 * * 0           root /opt/backup/backup full
+0 0 * * 1-6         root /opt/backup/backup

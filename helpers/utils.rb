@@ -19,3 +19,7 @@ end
 def service_restart(service)
   shell "/etc/init.d/#{service} restart"
 end
+
+def user_home(user)
+  user == 'root' ? '/root' : "/home/#{user}"
+end

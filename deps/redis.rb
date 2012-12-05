@@ -1,5 +1,6 @@
-dep "redis server", :template => 'managed' do
+dep "redis server",      :template => "managed" do
   installs 'redis-server'
+  provides ['redis-server']
 end
 
 dep 'redis lib', :template => 'managed' do

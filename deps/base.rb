@@ -1,32 +1,23 @@
 dep 'sudo.managed'
 dep 'rsync.managed'
-dep 'tmux.managed'
 dep 'curl.managed'
 dep 'grep.managed'
 dep 'htop.managed'
 dep 'git.managed'
-dep "vim",          :template => "managed"
+dep "vim.managed"
 
 dep 'syslog-ng.managed'
 dep 'openvpn.managed'
-
-dep 'rsyslog', :template => "managed" do
-  provides ['rsyslogd']
-end
-
-dep "redis server",      :template => "managed" do
-  installs 'redis-server'
-  provides ['redis-server']
-end
 
 dep "mongodb", :template => "managed" do
   provides ['mongod', 'mongo']
 end
 
 dep 'imagemagick',  :template => 'managed' do
-  # installs "imagemagick",
-  #   "libgraphicsmagick1-dev",
-  #   "graphicsmagick-libmagick-dev-compat"
+   installs "imagemagick",
+     "libgraphicsmagick1-dev",
+     "graphicsmagick-libmagick-dev-compat",
+     "libmagickwand-dev"
   end
 
 dep 'java', :template => 'managed' do
@@ -50,7 +41,7 @@ dep "server base", :system_users, :root_mail_forwarder do
   system_users.to_a.each {|user| requires 'user create'.with(:user => user)}
   requires 'curl.managed',
     'grep.managed',
-    'tmux.managed',
+    'tmux conf',
     'htop.managed',
     'rsync.managed',
     'git.managed',
