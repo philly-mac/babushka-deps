@@ -3,22 +3,52 @@
 require 'time'
 require 'fileutils'
 
-type = ARGV[0]
+################################
+# Config
 
-base_dir         = "/var/suitepad/backups"
+base_dir         = "/opt/backups"
+logs_dir         = "#{base_dir}/logs"
 archives_dir     = "#{base_dir}/archives"
 splits_dir       = "#{base_dir}/splits"
-postgresql_dir   = "/opt/backups/postgresql"
-mongodb_dir      = "/opt/backups/mongodb"
+postgresql_dir   = "#{base_dir}/postgresql"
+mongodb_dir      = "#{base_dir}/mongodb"
 
-[base_dir, archives_dir, splits_dir, postgresql_dir, mongodb_dir].each do |dir|
+server_system_excludes = [
+  'app-server-01',
+  'app-server-02',
+  'db-server-01',
+  'db-server-02',
+  'search-server-01',
+  'mail-server-01',
+  'monitor-server-01',
+]
+
+backup_dirs = [
+  '/usr/local',
+  '/opt',
+  '/etc',
+  '/home',
+  '/root',
+  '/var/lib/lxc/app-server-01',
+  '/var/lib/lxc/app-server-02',
+  '/var/lib/lxc/db-server-01',
+  '/var/lib/lxc/db-server-02',
+  '/var/lib/lxc/search-server-01',
+  '/var/lib/lxc/mail-server-01',
+  '/var/lib/lxc/monitor-server-01',
+]
+
+################################
+
+
+type = ARGV[0]
+
+[base_dir, logs_dir, archives_dir, splits_dir, postgresql_dir, mongodb_dir].each do |dir|
   system("mkdir -p #{dir}") unless File.exist?(dir)
 end
 
-
 FileUtils.cd(base_dir) do
   date_stamp  = Time.now.strftime("%Y-%m-%d_%H-%M-%S")
-  backup_name = "backup-#{date_stamp}.tar.bz2"
 
   system "pg_dumpall -U postgres -h db-server-01 > #{postgresql_dir}/postgresql-db-server-01-#{date_stamp}.sql"
 
@@ -33,41 +63,30 @@ FileUtils.cd(base_dir) do
   cmd = []
   cmd << 'tar'
 
+  backup_label = type == 'full' ? 'full' : 'inc'
+
+  backup_name = "backup-#{date_stamp}-#{backup_label}.tar.bz2"
+
   if type == 'full' || !File.exist?("#{base_dir}/backup.snar")
     cmd << '--level=0'
     cmd << "-g #{base_dir}/backup.snar"
   end
 
   cmd << "-cjpvf #{backup_name}"
-  [
-    'app-server-01',
-    'app-server-02',
-    'db-server-01',
-    'db-server-02',
-    'search-server-01',
-    'mail-server-01',
-    'monitor-server-01',
-  ].each do |server|
+
+  server_system_excludes.each do |server|
     ['var', 'proc', 'dev', 'srv', 'mnt', 'sys', 'tmp'].each do |dir|
       cmd << "--exclude=/var/lib/lxc/#{server}/rootfs/#{dir}"
     end
   end
-  cmd << '/usr/local'
-  cmd << '/opt'
-  cmd << '/etc'
-  cmd << '/home'
-  cmd << '/root'
-  cmd << '/var/lib/lxc/app-server-01'
-  cmd << '/var/lib/lxc/app-server-02'
-  cmd << '/var/lib/lxc/db-server-01'
-  cmd << '/var/lib/lxc/db-server-02'
-  cmd << '/var/lib/lxc/search-server-01'
-  cmd << '/var/lib/lxc/mail-server-01'
-  cmd << '/var/lib/lxc/monitor-server-01'
+
+  cmd << "--exclude=/opt/backups"
+
+  backup_dirs.each{|backup_dir| cmd << backup_dir}
 
   FileUtils.cd(archives_dir) do
     puts cmd.join(' ')
-    `#{cmd.join(' ')} > #{base_dir}/log-#{date_stamp}.log`
+    `#{cmd.join(' ')} > #{logs_dir}/log-#{date_stamp}.log`
   end
 
   if File.exist?("#{archives_dir}/#{backup_name}")
