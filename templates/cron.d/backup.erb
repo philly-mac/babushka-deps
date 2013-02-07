@@ -1,2 +1,6 @@
-0 0 * * 0           root /opt/backup/backup full
-0 0 * * 1-6         root /opt/backup/backup
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+MAILTO=backup
+HOME=/root
+0 0 * * 0           root /opt/backups/bin/backup full
+0 0 * * 1-6         root /opt/backups/bin/backup
