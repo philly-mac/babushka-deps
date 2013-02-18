@@ -1,24 +1,26 @@
-dep 'sudo.managed'
-dep 'rsync.managed'
 dep 'curl.managed'
+dep 'git.managed'
 dep 'grep.managed'
 dep 'htop.managed'
-dep 'git.managed'
-dep "vim.managed"
-
-dep 'syslog-ng.managed'
+dep 'memcached.managed'
+dep 'nginx.managed'
 dep 'openvpn.managed'
+dep 'rsync.managed'
+dep 'sudo.managed'
+dep 'syslog-ng.managed'
+dep 'vim.managed'
+
 
 dep "mongodb", :template => "managed" do
   provides ['mongod', 'mongo']
 end
 
 dep 'imagemagick',  :template => 'managed' do
-   installs "imagemagick",
-     "libgraphicsmagick1-dev",
-     "graphicsmagick-libmagick-dev-compat",
-     "libmagickwand-dev"
-  end
+ installs "imagemagick",
+   "libgraphicsmagick1-dev",
+   "graphicsmagick-libmagick-dev-compat",
+   "libmagickwand-dev"
+end
 
 dep 'java', :template => 'managed' do
   installs "openjdk-7-jre"
@@ -35,7 +37,6 @@ dep 'libxml2', :template => 'managed' do
   installs "libxml2-dev"
 end
 
-
 dep "server base", :system_users, :root_mail_forwarder do
   requires 'sudo.managed'
   system_users.to_a.each {|user| requires 'user create'.with(:user => user)}
@@ -44,6 +45,7 @@ dep "server base", :system_users, :root_mail_forwarder do
     'htop.managed',
     'rsync.managed',
     'git.managed',
+    'sudoers',
     'ack',
     'email forward'.with(:user_dir => '/root', :email => root_mail_forwarder),
     'sshd configure'.with(:allowed_users => system_users.to_a.join(', ')),
@@ -54,4 +56,5 @@ dep "server base", :system_users, :root_mail_forwarder do
     'hosts add'.with(:host_names => 'monitor-server-01', :ip_address => '10.0.3.30'),
     'hosts add'.with(:host_names => 'search-server-01',  :ip_address => '10.0.3.40'),
     'hosts add'.with(:host_names => 'mail-server-01',    :ip_address => '10.0.3.50')
+    'hosts add'.with(:host_names => 'amqp-server-01',    :ip_address => '10.0.3.60')
 end

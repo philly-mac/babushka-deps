@@ -1,4 +1,4 @@
-dep 'backup cron', :hour, :minute do
+dep 'backup cron' do
 
   path = "/etc/cron.d/backup"
 
@@ -10,9 +10,9 @@ dep 'backup cron', :hour, :minute do
   end
 end
 
-dep "backup conf", :site_hostname do
+dep "backup conf" do
 
-  dir = '/opt/backup'
+  dir = '/opt/backups/bin'
   path = "#{dir}/backup"
 
   met? { path.p.exist? && generated_config?(path) }

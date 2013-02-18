@@ -8,6 +8,10 @@ def render_erb_template(file_path, options = {})
   render_erb("#{babushka_root}/templates/#{file_path}", options)
 end
 
+def public_key(key_name)
+  "#{babushka_root}/public-keys/#{key_name}"
+end
+
 def babushka_root
   @babushka_root ||= "#{File.dirname(__FILE__)}/.."
 end
@@ -22,4 +26,12 @@ end
 
 def user_home(user)
   user == 'root' ? '/root' : "/home/#{user}"
+end
+
+def group_email_address
+  'philip@ivercore.com'
+end
+
+def system_users
+  ['philip']
 end

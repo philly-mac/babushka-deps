@@ -16,7 +16,7 @@ dep "user create", :user, :system do
     met? { '/etc/passwd'.p.grep(/^#{user}/) }
 
     meet do
-      key = "#{babushka_root}/public-keys/#{user}.id_rsa.pub"
+      key = public_key("#{user}.id_rsa.pub")
 
       shell "useradd -m -g #{user} -G admin -s /bin/bash #{user}"
       shell "echo \"#{user}:password\"|chpasswd"

@@ -1,6 +1,5 @@
 dep 'sudoers' do
-  # ALL=(ALL) NOPASSWD: ALL
-  regex = "%wheel\\sALL=\\(ALL\\)\\sALL"
+  regex = "%admin\\sALL=\\(ALL\\)\\sNOPASSWD:\\sALL"
   path = '/etc/sudoers'
 
   met? { path.p.grep(/^#{regex}/) }

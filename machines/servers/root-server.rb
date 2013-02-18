@@ -1,12 +1,11 @@
+# encoding: utf-8
+
 dep 'root-server' do
-
-  group_email_address = 'philip@ivercore.com'
-
-  requires    'server base'.with(:system_users => ['philip'], :root_mail_forwarder => 'philip@ivercore.com'),
+  requires    'server base'.with(:system_users => system_users, :root_mail_forwarder => group_email_address),
     'tmux conf'.with(:user => 'root'),
     'time zone'.with(:zone => 'Europe/Berlin'),
-    'backup cron'.with(:hour => 0, :minute => 0),
-    'backup conf'.with(:server => 'root-server'),
+    'backup cron',
+    'backup conf',
     'nginx.managed',
     'iptables config'.with(
       :config => [

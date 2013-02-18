@@ -1,7 +1,7 @@
 dep 'elasticsearch' do
   requires 'java'
 
-  elasticsearch_version = '0.19.9'
+  elasticsearch_version = '0.20.5'
 
   met? { File.exists?("/usr/share/elasticsearch/bin/elasticsearch") }
 

@@ -1,8 +1,7 @@
+# encoding: utf-8
+
 dep 'db-server-02' do
-
-  group_email_address = 'philip@ivercore.com'
-
-  requires    'server base'.with(:system_users => ['philip'], :root_mail_forwarder => 'philip@ivercore.com'),
+  requires    'server base'.with(:system_users => system_users, :root_mail_forwarder => group_email_address),
     'postgresql server',
     'postfix client config',
     'graylog2 rsyslog config',
