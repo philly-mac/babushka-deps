@@ -9,7 +9,7 @@ dep "user create", :user, :system do
     end
 
   else
-    requires 'sudo',
+    requires 'sudo.bin',
       'group create'.with(:group => user, :system => false),
       'group create'.with(:group => 'admin', :system => false)
 

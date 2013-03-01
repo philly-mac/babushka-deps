@@ -38,7 +38,7 @@ dep 'libxml2', :template => 'managed' do
 end
 
 dep "server base", :system_users, :root_mail_forwarder do
-  requires 'sudo.managed'
+  requires 'sudo.bin'
   system_users.to_a.each {|user| requires 'user create'.with(:user => user)}
   requires 'curl.managed',
     'grep.managed',
